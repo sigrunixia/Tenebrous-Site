@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Make card covers fill their card.
+"""Make card covers fill their card, and give trip cards without one a placeholder.
 
 For each raster cover in a Bases card, write a normalised thumbnail next to
 the original (<name>.card.webp, 800x600, cropped to 4:3) and point the card at
@@ -18,6 +18,10 @@ W, H = 800, 600
 # keep a little above the middle so heads and skylines stay in.
 card = re.compile(
     r'(<div class="bases-card-image" style="--cover:url\(\')([^\']+)(\'\)"><img src=")([^"]+)(")([^>]*?)style="object-fit:(?:contain|cover);"')
+
+# Trip cards with no cover get a placeholder block, which the theme fills with an icon.
+bare = re.compile(r'(<a [^>]*data-slug="trips/[^"]*"[^>]*>)(<div class="bases-card-body">)')
+PLACEHOLDER = '<div class="bases-card-image bases-card-placeholder" aria-hidden="true"></div>'
 
 made = {}
 def thumb(page_dir, rel):
@@ -47,7 +51,7 @@ for root, _, files in os.walk(PUBLIC):
             new = new if new.startswith(".") else "./" + new
             return f'{m.group(1)}{new}{m.group(3)}{new}{m.group(5)}{m.group(6)}style="object-fit:cover;"'
 
-        out = card.sub(fix, text)
+        out = bare.sub(lambda m: m.group(1) + PLACEHOLDER + m.group(2), card.sub(fix, text))
         if out != text:
             open(path, "w", encoding="utf-8").write(out)
             pages += 1

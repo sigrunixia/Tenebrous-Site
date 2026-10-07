@@ -21,4 +21,5 @@ The CSS does very little by itself, because most of it styles classes that get a
 | `base-map-embed` | `passes/bases-map.py` | The Leaflet map |
 | `bases-group-heading` | `passes/bases-groups.py` | Year headings in a Bases list |
 | `bases-card-image`, `--cover` | `build.sh`, `passes/card-covers.py` | The blurred cover behind a card image |
+| `bases-card-placeholder` | `passes/card-covers.py` | The compass on a trip card with no cover |
 | `skip-link`, `visually-hidden` | `a11y/a11y-fix.py` | The skip link, and text only a screen reader sees |
