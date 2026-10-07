@@ -252,6 +252,14 @@ for rel, s, fm in notes:
         if f:
             rows.append(("Filed under", f))
     img = thumb(fm.get("cover"))
+    # A project's body can carry its cover as ![[image|cover - description]], which shows the
+    # cover in Obsidian. On the site the infobox shows it instead, with that description.
+    cover_alt = ""
+    if project:
+        ce = re.search(r'<p>\s*<img[^>]*?alt="cover - ([^"]*)"[^>]*>\s*</p>|<img[^>]*?alt="cover - ([^"]*)"[^>]*>', text)
+        if ce:
+            cover_alt = ce.group(1) or ce.group(2)
+            text = text.replace(ce.group(0), "", 1)
     if not rows and not img:
         continue
     # A photo credit under the cover. The text comes from `cover-credit`, and the words
@@ -267,7 +275,7 @@ for rel, s, fm in notes:
     def box(where):
         b = f'<aside class="infobox infobox-{where}" aria-label="{"Trip facts" if trip else "Project facts" if project else "Page details"}">'
         if img:
-            b += f'<img src="/{img}" alt="" loading="lazy">' + credit
+            b += f'<img src="/{img}" alt="{cover_alt}" loading="lazy">' + credit
         return b + "<dl>" + "".join(f"<div><dt>{html.escape(k)}</dt><dd>{v}</dd></div>" for k, v in rows) + "</dl></aside>"
     # After the first heading of the note, and in the right sidebar. The callout it replaces comes out.
     text, n = re.subn(r"(</h1>)", lambda m: m.group(1) + box("inline"), text, count=1)
