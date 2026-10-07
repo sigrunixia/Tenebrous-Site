@@ -1,0 +1,10 @@
+name = "tenebrous-site"
+compatibility_date = "2026-10-07"
+
+[assets]
+directory = "./public"
+not_found_handling = "404-page"
+
+[[routes]]
+pattern = "tenebrousdragon.com"
+custom_domain = true

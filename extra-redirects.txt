@@ -1,0 +1,7 @@
+# Old address -> new permalink, for notes that gained a permalink after they were first published.
+/Trips/2026-10%20Chicago /chicago-il-2026-10 301
+/Trips/2026-10+Chicago /chicago-il-2026-10 301
+/trips/2026-10-chicago /chicago-il-2026-10 301
+/note-statuses-and-breadcrumbs /note-statuses 301
+/tenebrous-color-scheme /tenebrous-colour-scheme 301
+/highlight-colors /highlight-colours 301
