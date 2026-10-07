@@ -137,3 +137,6 @@ python3 passes/home-links.py public
 
 # Every external link gets the arrow, a new tab and a label saying so. Last, so it sees the footer.
 python3 passes/external-links.py public
+
+# The preview image in each page's social tags (covers arrive as raw wikilinks).
+python3 passes/social-images.py public
