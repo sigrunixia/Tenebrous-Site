@@ -149,6 +149,21 @@ html.tenebrism .unresolved {
 	cursor: default;
 }
 
+// External links are cyan with the arrow icon, and the arrow takes the link colour.
+html.tenebrism a.external {
+	color: var(--cyan);
+
+	.external-icon > path {
+		fill: currentColor;
+	}
+
+	@media (hover: hover) {
+		&:hover {
+			color: var(--silver);
+		}
+	}
+}
+
 html.tenebrism a.tag-link:not([class*="tl-"]) {
 	color: var(--pink);
 }

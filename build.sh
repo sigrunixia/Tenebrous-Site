@@ -134,3 +134,6 @@ python3 passes/footer-links.py public
 
 # The home page's sidebar links.
 python3 passes/home-links.py public
+
+# Every external link gets the arrow, a new tab and a label saying so. Last, so it sees the footer.
+python3 passes/external-links.py public

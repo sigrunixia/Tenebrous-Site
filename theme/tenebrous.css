@@ -2608,6 +2608,18 @@ html.tenebrism .unresolved {
   cursor: default;
 }
 
+html.tenebrism a.external {
+  color: var(--cyan);
+}
+html.tenebrism a.external .external-icon > path {
+  fill: currentColor;
+}
+@media (hover: hover) {
+  html.tenebrism a.external:hover {
+    color: var(--silver);
+  }
+}
+
 html.tenebrism a.tag-link:not([class*=tl-]) {
   color: var(--pink);
 }

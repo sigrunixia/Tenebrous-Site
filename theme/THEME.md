@@ -11,6 +11,7 @@ The CSS does very little by itself, because most of it styles classes that get a
 | `theme-dark`, `tenebrism`, `swirl`, `home` on `<html>` | `build.sh` | The palette, the look, and the home page layout |
 | `markdown-reading-view` | `build.sh` | Lets Obsidian's reading-view styles apply |
 | `breadcrumb` | `build.sh` | The breadcrumb line at the top of a note |
+| `external`, `external-icon` | Quartz, and `passes/external-links.py` for the arrow, the new tab and the label | A link to another website, in cyan with an arrow |
 | `unresolved` | `passes/mark-links.py` | A link to a note that is not published, dotted |
 | `tag-line`, `tl-<tag>` | `passes/mark-links.py` | A line that starts with a status tag |
 | `text-highlight`, `hl-<colour>` | `passes/mark-links.py` | A highlight, coloured by its emoji |
