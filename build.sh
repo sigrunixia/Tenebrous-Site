@@ -8,15 +8,15 @@ cd "$HERE"
 # Compile the Tenebrous theme for Quartz.
 THEME="${THEME_DIR:-$HOME/Developer/Tenebrous-Obsidian}"
 mkdir -p theme
-sass --no-source-map --charset "$THEME/src/main-quartz.scss" theme/tenebrous.css
+sass --no-source-map --charset --load-path="$THEME/src" theme/src/main.scss theme/tenebrous.css
 cp theme/tenebrous.css quartz/styles/tenebrous.css
 
 stage/stage.sh
-cp "$THEME/assets/favicon/favicon-196x196.png" quartz/static/icon.png
-mkdir -p quartz/static/fonts && cp "$THEME"/assets/fonts/*.woff2 quartz/static/fonts/
+cp "theme/assets/favicon/favicon-196x196.png" quartz/static/icon.png
+mkdir -p quartz/static/fonts && cp theme/assets/fonts/*.woff2 quartz/static/fonts/
 cp "${VAULT:-/Users/Signia/Vaults/Tenebrous}/Admin/Attachments/tenebrous-dragon.png" quartz/static/tenebrous-dragon.png
 # The swirl look's picture, used by the default look.
-cp "$THEME/assets/swirl.svg" quartz/static/swirl.svg
+cp "theme/assets/swirl.svg" quartz/static/swirl.svg
 npx quartz build -d .stage
 
 # The home note has permalink "home" and is staged as index.md, which Quartz
@@ -109,8 +109,8 @@ python3 passes/inject-chrome.py public .build/chrome.html "$TITLE"
 find public -name '*.html' -exec perl -pi -e 's{<h3>Table of Contents</h3>}{<h3>Outline</h3>}g' {} +
 
 # Favicons from the theme, replacing Quartz's default icon and generated .ico.
-cp "$THEME"/assets/favicon/favicon-*.png public/static/
-cp "$THEME/assets/favicon/favicon.ico" public/favicon.ico
+cp theme/assets/favicon/favicon-*.png public/static/
+cp "theme/assets/favicon/favicon.ico" public/favicon.ico
 ICONS='<link rel="icon" href="/favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png"><link rel="icon" type="image/png" sizes="196x196" href="/static/favicon-196x196.png"><link rel="apple-touch-icon" sizes="152x152" href="/static/favicon-152x152.png"><link rel="apple-touch-icon" sizes="167x167" href="/static/favicon-167x167.png"><link rel="apple-touch-icon" sizes="180x180" href="/static/favicon-180x180.png">'
 find public -name '*.html' -exec perl -pi -e 'BEGIN{$i=shift} s{<link rel="icon" href="[^"]*static/icon\.png"/>}{$i}g' "$ICONS" {} +
 
