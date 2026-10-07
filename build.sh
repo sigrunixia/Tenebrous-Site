@@ -7,7 +7,9 @@ cd "$HERE"
 
 # Compile the Tenebrous theme for Quartz.
 THEME="${THEME_DIR:-$HOME/Developer/Tenebrous-Obsidian}"
-sass --no-source-map --charset "$THEME/src/main-quartz.scss" quartz/styles/tenebrous.css
+mkdir -p theme
+sass --no-source-map --charset "$THEME/src/main-quartz.scss" theme/tenebrous.css
+cp theme/tenebrous.css quartz/styles/tenebrous.css
 
 stage/stage.sh
 cp "$THEME/assets/favicon/favicon-196x196.png" quartz/static/icon.png
