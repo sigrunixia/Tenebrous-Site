@@ -9,7 +9,7 @@ cd "$HERE"
 THEME="${THEME_DIR:-$HOME/Developer/Tenebrous-Obsidian}"
 sass --no-source-map --charset "$THEME/src/main-quartz.scss" quartz/styles/tenebrous.css
 
-./stage.sh
+stage/stage.sh
 cp "$THEME/assets/favicon/favicon-196x196.png" quartz/static/icon.png
 mkdir -p quartz/static/fonts && cp "$THEME"/assets/fonts/*.woff2 quartz/static/fonts/
 cp "${VAULT:-/Users/Signia/Vaults/Tenebrous}/Admin/Attachments/tenebrous-dragon.png" quartz/static/tenebrous-dragon.png
@@ -60,7 +60,7 @@ find public -name '*.html' -exec perl -pi -e '
 ' {} +
 
 # The Bases plugin ignores groupBy, so add the year headings it leaves out.
-python3 bases-groups.py public .stage
+python3 passes/bases-groups.py public .stage
 
 # The graph loads d3 and pixi.js from a CDN at run time. Serve the copies in
 # quartz/static/vendor instead.
@@ -75,33 +75,33 @@ find public -name '*.html' -exec perl -pi -e 's{<link rel="preconnect" href="htt
 # Drop breadcrumb-only links from the graph data so Home and the hubs do not
 # connect to every page.
 # Drop the tag pages nobody needs, before links to them are checked.
-python3 tag-pages.py public .stage
-python3 graph-links.py public .stage
+python3 passes/tag-pages.py public .stage
+python3 passes/graph-links.py public .stage
 
 # Mark unresolved links and give coloured highlights a class per colour.
-python3 mark-links.py public
+python3 passes/mark-links.py public
 
 # Redirect old Publish paths for notes that had no permalink.
-python3 old-urls.py .stage public
-python3 tag-pages.py public .stage --redirects
+python3 passes/old-urls.py .stage public
+python3 passes/tag-pages.py public .stage --redirects
 
 # Draw the Bases map view with Leaflet, from the markers baked for Publish.
-python3 bases-map.py public .stage "$HOME/Developer/Tenebrous-Obsidian/src/scripts/baked-data.ts"
+python3 passes/bases-map.py public .stage "$HOME/Developer/Tenebrous-Obsidian/src/scripts/baked-data.ts"
 
 # Normalised, cropped thumbnails so card covers fill the card.
-python3 card-covers.py public
+python3 passes/card-covers.py public
 
 # A trip infobox, to the right of the note, from its frontmatter.
-python3 infobox.py public .stage
+python3 passes/infobox.py public .stage
 
 # The logo and social links come from the theme: the dragon image from the
 # vault, the links from the theme's own link list.
 VAULT="${VAULT:-/Users/Signia/Vaults/Tenebrous}"
 mkdir -p .build
 esbuild "$THEME/src/scripts/features/social-links/links.ts" --format=esm --outfile=.build/links.mjs --log-level=error
-node chrome.mjs "$PWD/.build/links.mjs" > .build/chrome.html
+node passes/chrome.mjs "$PWD/.build/links.mjs" > .build/chrome.html
 TITLE="$(sed -n 's/^  pageTitle: *//p' quartz.config.yaml | head -1)"
-python3 inject-chrome.py public .build/chrome.html "$TITLE"
+python3 passes/inject-chrome.py public .build/chrome.html "$TITLE"
 
 # Obsidian calls it the outline.
 find public -name '*.html' -exec perl -pi -e 's{<h3>Table of Contents</h3>}{<h3>Outline</h3>}g' {} +
@@ -119,16 +119,16 @@ find public -name '*.html' -exec perl -0pi -e 's{<p show-comma="true" class="con
 find public -name '*.html' -exec perl -pi -e 's{(<span class="bases-text">\d{4}-\d{2}-\d{2})T[0-9:.+-Z]*(</span>)}{$1$2}g' {} +
 
 # A graph button beside the search bar.
-python3 graph-button.py public
+python3 passes/graph-button.py public
 
 # A back-to-top button and a phone outline.
-python3 page-nav.py public
+python3 passes/page-nav.py public
 
 # Accessibility fixes (landmarks, language, labels), last so it sees the final markup.
-python3 a11y-fix.py public
+python3 a11y/a11y-fix.py public
 
 # Footer links and the feed link.
-python3 footer-links.py public
+python3 passes/footer-links.py public
 
 # The home page's sidebar links.
-python3 home-links.py public
+python3 passes/home-links.py public

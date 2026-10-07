@@ -9,7 +9,7 @@ set -euo pipefail
 
 VAULT="${VAULT:-/Users/Signia/Vaults/Tenebrous}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
-STAGE="$HERE/.stage"
+STAGE="$HERE/../.stage"
 
 rm -rf "$STAGE"
 mkdir -p "$STAGE"

@@ -10,7 +10,7 @@ import html, os, re, sys
 
 public = sys.argv[1]
 here = os.path.dirname(os.path.abspath(__file__))
-links = [tuple(p.strip() for p in line.split("|", 1)) for line in open(os.path.join(here, "home-links.txt"), encoding="utf-8") if "|" in line]
+links = [tuple(p.strip() for p in line.split("|", 1)) for line in open(os.path.join(here, "data", "home-links.txt"), encoding="utf-8") if "|" in line]
 items = "".join(f'<li class="depth-0 site-link"><a href="{html.escape(h)}" class="internal">{html.escape(l)}</a></li>' for l, h in links)
 path = os.path.join(public, "index.html")
 t = open(path, encoding="utf-8").read()

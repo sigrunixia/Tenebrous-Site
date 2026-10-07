@@ -8,7 +8,7 @@ import html, os, re, sys
 
 public = sys.argv[1]
 here = os.path.dirname(os.path.abspath(__file__))
-links = [tuple(p.strip() for p in line.split("|", 1)) for line in open(os.path.join(here, "footer-links.txt"), encoding="utf-8") if "|" in line]
+links = [tuple(p.strip() for p in line.split("|", 1)) for line in open(os.path.join(here, "data", "footer-links.txt"), encoding="utf-8") if "|" in line]
 items = "".join(f'<li><a href="{html.escape(h)}" class="internal">{html.escape(l)}</a></li>' for l, h in links)
 feed = '<link rel="alternate" type="application/rss+xml" title="Tenebrous Dragon" href="/index.xml">'
 n = 0

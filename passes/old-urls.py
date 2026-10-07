@@ -36,7 +36,7 @@ for old, new in sorted(rules):
     lines.append(f"/{urllib.parse.quote(old)} /{new} 301")
     if " " in old:
         lines.append(f"/{old.replace(' ', '+')} /{new} 301")
-extra = os.path.join(os.path.dirname(os.path.abspath(__file__)), "extra-redirects.txt")
+extra = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "extra-redirects.txt")
 if os.path.exists(extra):   # old addresses of notes that have since gained a permalink
     lines += [l.strip() for l in open(extra, encoding="utf-8") if l.strip() and not l.startswith("#")]
 open(os.path.join(PUBLIC, "_redirects"), "w").write("\n".join(lines) + "\n")
