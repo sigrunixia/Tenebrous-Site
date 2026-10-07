@@ -1,3 +1,5 @@
+@use 'site-palette' as s;
+
 // The sidebar graph panel is hidden (the local graph is nearly empty on a site with
 // few links). The graph button beside the search bar opens the full graph overlay,
 // which Quartz keeps inside the same container, so the container stays in the page.
@@ -53,7 +55,7 @@
 	height: 36px;
 	padding: 0;
 	background: var(--bg_dark2);
-	border: 1px solid #59607f;
+	border: 1px solid s.$edge;
 	border-radius: 6px;
 	color: var(--fg);
 	cursor: pointer;

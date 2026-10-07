@@ -1,6 +1,6 @@
 # Tenebrous theme for Quartz
 
-This is the Quartz half of the Tenebrous theme. [Tenebrous-Obsidian](https://github.com/sigrunixia/Tenebrous-Obsidian) is the Obsidian half, and it mostly works on Obsidian Publish too. Anything only Quartz needs lives here. The palette, typography, dark theme and callouts are shared, so Sass reads those from the Obsidian repo.
+This is the Quartz half of the Tenebrous theme. [Tenebrous-Obsidian](https://github.com/sigrunixia/Tenebrous-Obsidian) is the Obsidian half, and it mostly works on Obsidian Publish too. Anything only Quartz needs lives here. The palette, typography, dark theme and callouts are shared, so Sass reads those from the Obsidian repo. The site's own colours are in `src/_site-palette.scss`, which `build-palette.py` in Tenebrous writes from `palette.json`, so never edit it.
 
 The SCSS is in `src/`, starting at `main.scss`. `build.sh` compiles it to `tenebrous.css` and copies that into Quartz, so edit the SCSS and never the compiled file. The fonts, `swirl.svg` and the favicons are in `assets/`.
 

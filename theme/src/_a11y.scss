@@ -1,3 +1,5 @@
+@use 'site-palette' as s;
+
 // Helpers added by the build's accessibility pass (a11y-fix.py in Tenebrous-Site).
 
 // Text for screen readers only.
@@ -165,7 +167,7 @@ html .search > .search-container > .search-space > .search-layout .highlight {
 	height: 44px;
 	padding: 0;
 	background: var(--bg_highlight);
-	border: 1px solid #59607f;
+	border: 1px solid s.$edge;
 	border-radius: 50%;
 	color: var(--fg);
 	cursor: pointer;

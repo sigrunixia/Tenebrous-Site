@@ -1,3 +1,5 @@
+@use 'site-palette' as s;
+
 // Obsidian offers six highlight colours, and the vault marks each one with a
 // coloured emoji at the start of the highlight. Quartz drops the colour, so the
 // build adds a class per emoji (hl-red and so on, ten colours) and each gets its own hue.
@@ -19,7 +21,7 @@
 		// Quartz only, from here to the end of the list.
 		"cyan": var(--cyan),
 		"pink": var(--pink),
-		"brown": #b0825a,
+		"brown": s.$brown,
 		"silver": var(--silver)
 	) {
 		&.hl-#{$name} {

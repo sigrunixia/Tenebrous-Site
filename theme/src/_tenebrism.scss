@@ -1,5 +1,7 @@
 @use 'sass:list';
 @use 'sass:math';
+@use 'lib/palette' as p;
+@use 'site-palette' as s;
 
 // A tenebrist variant of the site, switched on by the class "tenebrism" on
 // <html> (the build adds it when TENEBRISM=1).
@@ -124,15 +126,15 @@ html.tenebrism .markdown-reading-view {
 html.tenebrism .sidebar {
 	--dark: var(--comment);
 	--darkgray: var(--comment);
-	--gray: #8c92b6;
-	--lightgray: #1c202c;
+	--gray: #{p.$comment};
+	--lightgray: #{s.$shadow-line};
 }
 
 // Fields and buttons need an edge of 3:1 against the ground (WCAG 1.4.11), which
 // the dimmed sidebar border does not give. #59607f is 3.1:1 on #0d0f14.
 html.tenebrism .search > .search-button,
 html.tenebrism .sidebar button {
-	border-color: #59607f;
+	border-color: #{s.$edge};
 }
 
 // Internal links are blue, an external link is cyan with its arrow, and a name with
@@ -175,18 +177,18 @@ html.tenebrism .site-dragon img {
 @media (prefers-contrast: more) {
 	html.theme-dark.tenebrism,
 	html.tenebrism body.theme-dark {
-		--comment: #b4bad8;
-		--fg_dark: #d0d5ee;
+		--comment: #{s.$faint-high};
+		--fg_dark: #{s.$text-high};
 	}
 
 	html.tenebrism .sidebar {
-		--gray: #b4bad8;
-		--lightgray: #59607f;
+		--gray: #{s.$faint-high};
+		--lightgray: #{s.$edge};
 	}
 
 	html.tenebrism .search > .search-button,
 	html.tenebrism .sidebar button {
-		border-color: #9aa1c4;
+		border-color: #{s.$edge-high};
 	}
 
 	html.tenebrism .site-dragon img {
