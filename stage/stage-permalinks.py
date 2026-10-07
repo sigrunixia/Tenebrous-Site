@@ -50,7 +50,8 @@ for p, text in notes.items():
 link = re.compile(r"(!?)\[\[([^\]|#]+)(#[^\]|]*)?(\|[^\]]*)?\]\]")
 
 def rewrite_links(body):
-    def sub(m):
+    # In a table row the pipe that starts the display text has to be escaped, or it ends the cell.
+    def sub(m, bar):
         bang, target, heading, alias = m.groups()
         hit = targets.get(target.strip().lower())
         if not hit:
@@ -59,11 +60,15 @@ def rewrite_links(body):
         if alias:
             shown = alias
         elif heading:
-            shown = "|" + name + " > " + heading[1:]
+            shown = bar + name + " > " + heading[1:]
         else:
-            shown = "|" + name
+            shown = bar + name
         return "%s[[%s%s%s]]" % (bang, perma, heading or "", shown)
-    return link.sub(sub, body)
+    out = []
+    for line in body.split("\n"):
+        bar = "\\|" if line.lstrip().startswith("|") else "|"
+        out.append(link.sub(lambda m: sub(m, bar), line))
+    return "\n".join(out)
 
 def clean_aliases(fm, own):
     out, in_aliases = [], False
