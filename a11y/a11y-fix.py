@@ -102,6 +102,11 @@ for root, _, files in os.walk(PUBLIC):
         body = body.replace('<p class="breadcrumb">', '<p class="breadcrumb" role="navigation" aria-label="Breadcrumb">', 1)
         body = re.sub(r'<div class="toc"', '<div class="toc" role="navigation" aria-label="On this page"', body, count=1)
 
+        # Pages with no other navigation (the 404 and canvas pages) still get one, around the site name.
+        if 'role="navigation"' not in body and "<nav" not in body:
+            body = re.sub(r'(<header class="site-header">)(.*?)(</header>)',
+                          r'\1<nav aria-label="Site" style="display:contents">\2</nav>\3', body, count=1, flags=re.S)
+
         # Quartz writes the sidebar titles and the listing titles as h3, and a listing
         # has no h2 above them. aria-level says what level they are without changing the look.
         body = body.replace('<div class="graph"><h3>', '<div class="graph"><h3 aria-level="2">')
@@ -123,7 +128,7 @@ for root, _, files in os.walk(PUBLIC):
             if not name:
                 return m.group(0)
             return f'{li_open}{inp.replace("<input", "<input aria-label=" + chr(34) + html.escape(name, quote=True) + chr(34), 1)}{rest}'
-        body = re.sub(r'(<li[^>]*task-list-item[^>]*>)(<input type="checkbox"[^>]*/?>)(.*?(?=</li>))', checkbox, body, flags=re.S)
+        body = re.sub(r'(<li[^>]*task-list-item[^>]*>)(<input type="checkbox"[^>]*/?>)(.*?(?=</li>|<ul|<ol))', checkbox, body, flags=re.S)
 
         # Links that open a new tab.
         def newtab(m):
