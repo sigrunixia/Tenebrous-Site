@@ -1,0 +1,12 @@
+// The footer has three lines (copyright, what the site is made with, when it was
+// built) over the links. Quartz spaces the links for a single line above them, so
+// close the gaps here.
+#quartz-body footer {
+	p {
+		margin: 0 0 0.25rem;
+	}
+
+	ul {
+		margin: 0.6rem 0 0;
+	}
+}

@@ -1630,11 +1630,11 @@ html body .landing .callout[data-callout=hub-about] {
   }
 }
 @media (min-width: 1280px) {
-  .page[data-frame=default] > #quartz-body {
+  .page[data-frame=default] > #quartz-body:has(.sidebar.right .infobox) {
     grid-template-columns: 320px minmax(0, 1fr) 21rem;
     grid-template-areas: "grid-sidebar-left grid-header grid-sidebar-right" "grid-sidebar-left grid-center grid-sidebar-right" "grid-sidebar-left grid-footer grid-sidebar-right";
   }
-  .page[data-frame=default] > #quartz-body .sidebar.right {
+  .page[data-frame=default] > #quartz-body:has(.sidebar.right .infobox) .sidebar.right {
     display: flex;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -1656,6 +1656,13 @@ html body .landing .callout[data-callout=hub-about] {
 
 ul.toc-content.overflow > li.site-link > a {
   opacity: 0.85;
+}
+
+#quartz-body footer p {
+  margin: 0 0 0.25rem;
+}
+#quartz-body footer ul {
+  margin: 0.6rem 0 0;
 }
 
 .site-dragon {

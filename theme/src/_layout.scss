@@ -58,20 +58,23 @@
 			"grid-sidebar-left grid-footer";
 	}
 
-	// From 1280px the right sidebar comes back, to hold the infobox. A page with
-	// nothing to show leaves it empty.
+	// From 1280px the right sidebar comes back, to hold the infobox. A page with no
+	// infobox (the home page and the hubs) keeps the two columns, so it does not
+	// reserve an empty strip on the right.
 	@media (min-width: 1280px) {
-		grid-template-columns: 320px minmax(0, 1fr) 21rem;
-		grid-template-areas:
-			"grid-sidebar-left grid-header grid-sidebar-right"
-			"grid-sidebar-left grid-center grid-sidebar-right"
-			"grid-sidebar-left grid-footer grid-sidebar-right";
+		&:has(.sidebar.right .infobox) {
+			grid-template-columns: 320px minmax(0, 1fr) 21rem;
+			grid-template-areas:
+				"grid-sidebar-left grid-header grid-sidebar-right"
+				"grid-sidebar-left grid-center grid-sidebar-right"
+				"grid-sidebar-left grid-footer grid-sidebar-right";
 
-		.sidebar.right {
-			display: flex;
-			overflow-y: auto;
-			scrollbar-width: thin;
-			padding: 1.5rem 1.5rem 2rem 0;
+			.sidebar.right {
+				display: flex;
+				overflow-y: auto;
+				scrollbar-width: thin;
+				padding: 1.5rem 1.5rem 2rem 0;
+			}
 		}
 	}
 
