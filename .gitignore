@@ -12,6 +12,4 @@ replit.nix
 .quartz/
 quartz/cli/tui/dist/
 .turbo/
-.stage/
-.build/
 a11y-alt-todo.txt
