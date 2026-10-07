@@ -9,7 +9,7 @@
 - A link that opens a new tab says so (as hidden text, or in its aria-label).
 - Photos get alt text from their caption (a caption callout), or from the title
   of the callout they sit in. Photos with neither are listed in a11y-alt-todo.txt,
-  for alt text written in the vault as ![[photo.jpg|what is in it]].
+  for alt text written in the vault as ![[photo.jpg|what is in it]], or as `cover-alt` for a cover.
 - A page with no h1 (a canvas) gets a visually hidden one from its title.
 
 usage: a11y-fix.py public
@@ -153,7 +153,7 @@ for root, _, files in os.walk(PUBLIC):
             open(path, "w", encoding="utf-8").write(t); changed += 1
 
 with open("a11y-alt-todo.txt", "w") as out:
-    out.write("Photos with no alt text. Write it in the note as ![[photo.jpg|what is in it]].\n")
+    out.write("Photos with no alt text. Write it in the note as ![[photo.jpg|what is in it]], or as `cover-alt` for a cover.\n")
     for rel, src in todo:
         out.write(f"{rel}\t{src}\n")
 print(f"accessibility fixes on {changed} page(s); photos still needing alt text: {len(todo)} (a11y-alt-todo.txt)")

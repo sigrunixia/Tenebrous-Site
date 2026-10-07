@@ -260,6 +260,9 @@ for rel, s, fm in notes:
         if ce:
             cover_alt = ce.group(1) or ce.group(2)
             text = text.replace(ce.group(0), "", 1)
+    # `cover-alt` describes the cover for screen readers and wins over the body description.
+    if fm.get("cover-alt"):
+        cover_alt = html.escape(as_list(fm["cover-alt"])[0], quote=True)
     if not rows and not img:
         continue
     # A photo credit under the cover. The text comes from `cover-credit`, and the words
