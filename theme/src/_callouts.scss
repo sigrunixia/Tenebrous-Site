@@ -58,6 +58,8 @@ $callout-icons: (
 	"stay":          "bed-double",
 	"hub-obsidian":  "gem",
 	"hub-tattoos":   "flame",
+	"hub-essays":    "scroll-text",
+	"hub-gear":      "backpack",
 	"hub-traveling": "luggage",
 	"hub-about":     "user"
 );
@@ -102,5 +104,7 @@ html body .landing .callout {
 	&[data-callout="hub-tattoos"] { --hub-hue: var(--red); }
 	&[data-callout="hub-traveling"] { --hub-hue: var(--teal); }
 	&[data-callout="hub-projects"] { --hub-hue: var(--cyan); }
+	&[data-callout="hub-essays"] { --hub-hue: var(--purple); }
+	&[data-callout="hub-gear"] { --hub-hue: var(--orange); }
 	&[data-callout="hub-about"] { --hub-hue: var(--yellow); }
 }
