@@ -20,7 +20,7 @@
 	background: none;
 	border: 0;
 	border-radius: 6px;
-	color: var(--comment);
+	color: var(--text-faint);
 	cursor: pointer;
 
 	&:hover {
@@ -36,8 +36,8 @@
 // The graph sits on its own darker panel with an edge you can see, so it does not
 // melt into the sidebar. The panel is darker than the page, like an inset.
 .graph > .graph-outer {
-	background: var(--bg_dark2);
-	border-color: color-mix(in srgb, var(--comment) 40%, var(--bg));
+	background: var(--bg-deep);
+	border-color: color-mix(in srgb, var(--text-faint) 40%, var(--bg));
 	box-shadow: inset 0 0 36px rgb(0 0 0 / 0.4);
 }
 
@@ -54,10 +54,10 @@
 	width: 36px;
 	height: 36px;
 	padding: 0;
-	background: var(--bg_dark2);
+	background: var(--bg-deep);
 	border: 1px solid s.$edge;
 	border-radius: 6px;
-	color: var(--fg);
+	color: var(--text-normal);
 	cursor: pointer;
 
 	&:hover {

@@ -17,16 +17,16 @@ html.theme-dark.tenebrism,
 html.tenebrism body.theme-dark {
 	--h1-color: var(--silver);
 	--h2-color: var(--amber);
-	--h3-color: var(--blue0);
+	--h3-color: var(--blue);
 	--h4-color: var(--teal);
-	--h5-color: var(--magenta);
-	--h6-color: var(--fg_dark);
+	--h5-color: var(--purple);
+	--h6-color: var(--text-muted);
 	--bold-color: var(--silver);
 	--italic-color: var(--amber0);
 
 	// Links are blue, the old Tenebrous accent. Amber is kept for the lit
 	// subject. Each kind of link is told apart by more than colour.
-	--link-color: var(--blue0);
+	--link-color: var(--blue);
 	--link-color-hover: var(--cyan);
 	--link-external-color: var(--cyan);
 	--link-external-color-hover: var(--silver);
@@ -124,9 +124,9 @@ html.tenebrism .markdown-reading-view {
 // brightest thing on the page. Quartz reads these variables for its text,
 // borders and icons, so lowering them there dims everything inside.
 html.tenebrism .sidebar {
-	--dark: var(--comment);
-	--darkgray: var(--comment);
-	--gray: #{p.$comment};
+	--dark: var(--text-faint);
+	--darkgray: var(--text-faint);
+	--gray: #{p.$text-faint};
 	--lightgray: #{s.$shadow-line};
 }
 
@@ -174,7 +174,7 @@ html.tenebrism .sidebar h3 {
 }
 
 html.tenebrism .site-social-link {
-	color: var(--comment);
+	color: var(--text-faint);
 
 	@media (hover: hover) {
 		&:hover {
@@ -192,8 +192,8 @@ html.tenebrism .site-dragon img {
 @media (prefers-contrast: more) {
 	html.theme-dark.tenebrism,
 	html.tenebrism body.theme-dark {
-		--comment: #{s.$faint-high};
-		--fg_dark: #{s.$text-high};
+		--text-faint: #{s.$faint-high};
+		--text-muted: #{s.$text-high};
 	}
 
 	html.tenebrism .sidebar {

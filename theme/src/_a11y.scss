@@ -22,9 +22,9 @@
 	left: 0.5rem;
 	z-index: 1000;
 	padding: 0.6rem 1rem;
-	background: var(--bg_highlight);
-	color: var(--fg);
-	border: 2px solid var(--blue0);
+	background: var(--bg-highlight);
+	color: var(--text-normal);
+	border: 2px solid var(--blue);
 	border-radius: 6px;
 	transform: translateY(-300%);
 
@@ -62,11 +62,11 @@
 	gap: 0.4rem 0.75rem;
 	margin-top: 2.5rem;
 	padding-top: 1rem;
-	border-top: 1px solid color-mix(in srgb, var(--comment) 35%, var(--bg));
+	border-top: 1px solid color-mix(in srgb, var(--text-faint) 35%, var(--bg));
 	font-size: 0.9em;
 
 	.filed-under-label {
-		color: var(--comment);
+		color: var(--text-faint);
 	}
 
 	ul {
@@ -86,7 +86,7 @@
 	a {
 		display: inline-block;
 		padding: 0.15rem 0.6rem;
-		border: 1px solid color-mix(in srgb, var(--blue0) 45%, var(--bg));
+		border: 1px solid color-mix(in srgb, var(--blue) 45%, var(--bg));
 		border-radius: 999px;
 		text-decoration: none;
 
@@ -102,12 +102,12 @@
 // stronger amber, both with the normal text colour (about 6:1 or better).
 html ::selection {
 	background: color-mix(in oklch, var(--amber) 25%, transparent);
-	color: var(--fg);
+	color: var(--text-normal);
 }
 
 html .search > .search-container > .search-space > .search-layout .highlight {
 	background: color-mix(in srgb, var(--amber) 38%, var(--bg));
-	color: var(--fg);
+	color: var(--text-normal);
 	border-radius: 3px;
 }
 
@@ -125,7 +125,7 @@ html .search > .search-container > .search-space > .search-layout .highlight {
 		cursor: pointer;
 		padding: 0.35rem 0;
 		font-weight: 600;
-		color: var(--fg);
+		color: var(--text-normal);
 	}
 
 	ul {
@@ -166,10 +166,10 @@ html .search > .search-container > .search-space > .search-layout .highlight {
 	width: 44px;
 	height: 44px;
 	padding: 0;
-	background: var(--bg_highlight);
+	background: var(--bg-highlight);
 	border: 1px solid s.$edge;
 	border-radius: 50%;
-	color: var(--fg);
+	color: var(--text-normal);
 	cursor: pointer;
 
 	&[hidden] {

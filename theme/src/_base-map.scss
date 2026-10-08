@@ -42,8 +42,8 @@
 // The scale bar sits quietly in the corner. Muted text and a muted bracket, both
 // well above 3:1 on the map (the bracket is #8c92b6 on #080a0e).
 .base-map-embed .leaflet-control-scale-line {
-	color: var(--fg_dark);
-	border-color: var(--comment);
+	color: var(--text-muted);
+	border-color: var(--text-faint);
 	border-width: 1px;
 	border-top-width: 0;
 	background-color: color-mix(in srgb, var(--background-secondary) 80%, transparent);

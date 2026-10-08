@@ -98,7 +98,7 @@ $callout-icons: (
 // (all amber) beat the .landing colours the note asks for. Obsidian never sets
 // "home", so this only repeats the landing colours with enough weight to win.
 html body .landing .callout {
-	&[data-callout="hub-obsidian"] { --hub-hue: var(--purple); }
+	&[data-callout="hub-obsidian"] { --hub-hue: var(--periwinkle); }
 	&[data-callout="hub-tattoos"] { --hub-hue: var(--red); }
 	&[data-callout="hub-traveling"] { --hub-hue: var(--teal); }
 	&[data-callout="hub-projects"] { --hub-hue: var(--cyan); }
