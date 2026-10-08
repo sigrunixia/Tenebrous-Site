@@ -40,7 +40,7 @@ for root, _, files in os.walk(STAGE):
         rel = os.path.relpath(p, STAGE)
         fm = fm_of(open(p, encoding="utf-8").read())
         name = os.path.splitext(f)[0]
-        entry = (title_of(p, fm) if "κόμβος" in fm.get("cssclasses", []) and not rel.startswith(("places", "types")) else (fm.get("title") or [name])[0], name)
+        entry = (title_of(p, fm) if {"κόμβος", "hub"} & set(fm.get("cssclasses", [])) and not rel.startswith(("places", "types")) else (fm.get("title") or [name])[0], name)
         for t in fm.get("tags", []):
             if t.lower() not in STRUCTURAL:
                 tags.add(t)
@@ -48,7 +48,7 @@ for root, _, files in os.walk(STAGE):
             kinds.append(entry)
         elif rel.startswith("places" + os.sep):
             places.append(entry)
-        elif "κόμβος" in fm.get("cssclasses", []) and rel not in ("index.md", "site-map.md"):
+        elif {"κόμβος", "hub"} & set(fm.get("cssclasses", [])) and rel not in ("index.md", "site-map.md"):
             hubs.append(entry)
 
 def lst(items):
