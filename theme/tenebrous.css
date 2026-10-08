@@ -1679,6 +1679,32 @@ ul.toc-content.overflow > li.site-link > a {
   margin: 0.3rem 0 0;
 }
 
+.canvas-footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 1.2rem;
+  padding: 0.3rem 1rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+}
+.canvas-footer p,
+.canvas-footer ul {
+  margin: 0;
+}
+.canvas-footer ul {
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
 .site-dragon {
   padding: 0 0 0.75rem;
 }

@@ -33,7 +33,15 @@ for root, _, files in os.walk(public):
             continue
         p = os.path.join(root, f)
         t = open(p, encoding="utf-8").read()
-        if "<footer" not in t or "application/rss+xml" in t:
+        if "application/rss+xml" in t:
+            continue
+        if "<footer" not in t:
+            if "canvas-page" not in t:
+                continue
+            # A canvas fills the window and has no footer of its own, so it gets a slim one.
+            t = t.replace("</body>", f'<footer class="canvas-footer">{mine}{updated}<ul>{items}</ul></footer></body>', 1)
+            t = t.replace("</head>", feed + "</head>", 1)
+            open(p, "w", encoding="utf-8").write(t); n += 1
             continue
         t = re.sub(r"(<footer[^>]*>)<p>Created with <a [^>]*>Quartz[^<]*</a>[^<]*</p>", lambda m: m.group(1) + mine + made + updated, t, count=1)
         t = re.sub(r"(<footer[^>]*>.*?<ul>)(</ul>)", lambda m: m.group(1) + items + m.group(2), t, count=1, flags=re.S)
