@@ -1,8 +1,5 @@
 @use 'publish/base-map';
 
-// The Bases map view. The CSS is the Publish one, shared. Publish gets a few
-// Obsidian size variables from its own stylesheet, which Quartz does not load,
-// so they are defined here with Obsidian's values.
 :root {
 	--size-4-2: 8px;
 	--size-4-3: 12px;
@@ -12,8 +9,6 @@
 	--bold-weight: 600;
 }
 
-// Leaflet draws its zoom and layer buttons white. Publish leaves them alone, but
-// on this site they should sit in the dark map like the other controls.
 .base-map-embed {
 	.leaflet-bar {
 		border: 1px solid var(--background-modifier-border);
@@ -32,15 +27,12 @@
 		}
 	}
 
-	// The layers icon is a dark picture, so invert it for the dark control.
 	.leaflet-control-layers-toggle {
 		background-color: transparent;
 		filter: invert(0.85);
 	}
 }
 
-// The scale bar sits quietly in the corner. Muted text and a muted bracket, both
-// well above 3:1 on the map (the bracket is #8c92b6 on #080a0e).
 .base-map-embed .leaflet-control-scale-line {
 	color: var(--text-muted);
 	border-color: var(--text-faint);

@@ -1,8 +1,5 @@
 @use 'site-palette' as s;
 
-// Helpers added by the build's accessibility pass (a11y-fix.py in Tenebrous-Site).
-
-// Text for screen readers only.
 .visually-hidden {
 	position: absolute;
 	width: 1px;
@@ -15,7 +12,6 @@
 	border: 0;
 }
 
-// The first thing a keyboard user reaches. It shows only while it has focus.
 .skip-link {
 	position: absolute;
 	top: 0.5rem;
@@ -37,7 +33,6 @@
 	outline: none;
 }
 
-// A visible focus ring for everything a keyboard can reach.
 :focus-visible {
 	outline: 2px solid var(--cyan);
 	outline-offset: 2px;
@@ -54,7 +49,6 @@
 	}
 }
 
-// The "Filed under" row at the end of a note.
 .filed-under {
 	display: flex;
 	flex-wrap: wrap;
@@ -96,10 +90,6 @@
 	}
 }
 
-// Selected text and search matches. Quartz paints both with the blue accent at 60%
-// and dark text, which hides the letters on this dark ground. Selection matches the
-// Obsidian theme (--text-selection, amber at 25%), and search matches use a slightly
-// stronger amber, both with the normal text colour (about 6:1 or better).
 html ::selection {
 	background: color-mix(in oklch, var(--amber) 25%, transparent);
 	color: var(--text-normal);
@@ -111,8 +101,6 @@ html .search > .search-container > .search-space > .search-layout .highlight {
 	border-radius: 3px;
 }
 
-// The phone outline, a collapsed "On this page" list under the title. The sidebar
-// outline is hidden on phones, so this is the only way to jump to a section there.
 .page-outline-mobile {
 	display: none;
 	margin: 0 0 1rem;
@@ -154,7 +142,6 @@ html .search > .search-container > .search-space > .search-layout .highlight {
 	}
 }
 
-// Back to top, at the bottom right, below the graph overlay.
 .back-to-top {
 	position: fixed;
 	right: 1rem;

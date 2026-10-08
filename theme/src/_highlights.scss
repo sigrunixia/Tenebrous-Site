@@ -1,13 +1,5 @@
 @use 'site-palette' as s;
 
-// Obsidian offers six highlight colours, and the vault marks each one with a
-// coloured emoji at the start of the highlight. Quartz drops the colour, so the
-// build adds a class per emoji (hl-red and so on, ten colours) and each gets its own hue.
-// The tint is 28% of the hue, and the text is silver, at least 4.5:1 on all.
-//
-// Only the Quartz site uses these classes. Obsidian itself knows six colours, red to
-// purple, and cyan, pink, brown and silver do nothing in the app or on Publish, because
-// CSS cannot select a highlight by its emoji. The build adds the class on the site.
 .markdown-reading-view .text-highlight {
 	color: var(--silver);
 
@@ -18,7 +10,6 @@
 		"green": var(--green),
 		"blue": var(--blue),
 		"purple": var(--periwinkle),
-		// Quartz only, from here to the end of the list.
 		"cyan": var(--cyan),
 		"pink": var(--pink),
 		"brown": s.$brown,

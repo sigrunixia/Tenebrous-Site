@@ -1,7 +1,5 @@
 @use 'lib/radius';
 
-// Card views from the Bases plugin, dressed like the hub backlink cards on
-// Publish.
 .markdown-reading-view {
 	.bases-cards {
 		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -22,8 +20,6 @@
 		}
 	}
 
-	// Covers are cropped to 4:3 by the build (card-covers.py), so the image simply
-	// fills the area.
 	.bases-card-image {
 		position: relative;
 		aspect-ratio: 4 / 3;
@@ -38,7 +34,6 @@
 		}
 	}
 
-	// Trips with no cover yet get a compass in its place (added by card-covers.py).
 	.bases-card-placeholder {
 		display: grid;
 		place-items: center;
@@ -99,9 +94,6 @@
 	}
 }
 
-// Some covers are black line icons (SVG) made for a light page. They are not
-// cropped, so they sit contained over a blurred copy of themselves, and are
-// lightened so they show on the dark card.
 .markdown-reading-view .bases-card-image:has(img[src$=".svg"]) {
 	&::before {
 		content: "";

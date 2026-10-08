@@ -1,5 +1,3 @@
-// The logo and the social link row sit under the site title, above search.
-// Both are inserted by the build, copied from the Publish layout.
 .site-dragon {
 	padding: 0 0 0.75rem;
 
@@ -37,12 +35,7 @@
 	}
 }
 
-// On a phone the sidebar becomes a short stack above the article, a small logo,
-// the social links and search. The graph and outline are left out so the
-// article starts near the top. This is also what half a screen looks like at
-// page zoom.
 @media (max-width: 800px) {
-	// The logo and the social links share a row, and search takes the row below.
 	.page[data-frame="default"] > #quartz-body .sidebar.left {
 		flex-direction: row;
 		flex-wrap: wrap;

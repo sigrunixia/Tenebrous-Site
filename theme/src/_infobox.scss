@@ -1,10 +1,5 @@
 @use 'lib/radius';
 
-// The infobox, built from frontmatter by infobox.py, in two copies. From 1280px
-// wide the right sidebar holds it (.infobox-side). Below that the inline copy
-// (.infobox-inline) floats to the right of the opening text, like an encyclopedia
-// infobox, and below 1100px the article is too narrow to share, so it stacks above
-// the text. Only one copy is ever shown.
 .infobox {
 	float: right;
 	width: 20rem;
@@ -24,7 +19,6 @@
 		margin: 0;
 	}
 
-	// The photo credit under the cover.
 	.infobox-credit {
 		margin: 0;
 		padding: 0.4rem 0.9rem 0;
@@ -37,7 +31,6 @@
 		padding: 0.7rem 0.9rem 0.3rem;
 	}
 
-	// Each label and its value travel together, so a column break never splits them.
 	dl > div {
 		break-inside: avoid;
 	}
@@ -59,8 +52,6 @@
 		color: var(--text-faint);
 	}
 
-	// Below 1100px the article is too narrow to share with a floated card. It spans
-	// the article instead, with the cover on the left and the facts beside it.
 	@media (max-width: 1100px) {
 		float: none;
 		width: auto;
@@ -78,8 +69,6 @@
 		}
 	}
 
-	// On phones the cover goes on top, in a wide crop so it does not fill the
-	// screen, and the facts run in two columns where there is room.
 	@media (max-width: 800px) {
 		&:has(img) {
 			display: block;
@@ -111,8 +100,6 @@
 	}
 }
 
-// The infobox shows the properties, so Quartz's own properties panel is hidden.
-// (The plugin has to stay on, or the build filters out every page.)
 .page-header .note-properties {
 	display: none;
 }

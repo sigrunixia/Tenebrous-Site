@@ -1,5 +1,3 @@
-// The Quartz site uses Alegreya Sans and Cardo, which read Greek well. The
-// Obsidian theme keeps the system fonts.
 @use 'lib/typography' with (
 	$serif: ('Cardo', Georgia, 'Times New Roman', serif),
 	$sans: ('Alegreya Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif)

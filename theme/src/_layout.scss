@@ -1,19 +1,12 @@
-// Quartz lays pages out in three columns, with a right sidebar. The right
-// sidebar is empty here (graph and contents sit on the left), so drop it from
-// the grid at every width and let the left sidebar scroll if it runs long.
 .page[data-frame="default"] > #quartz-body {
 	.sidebar.right {
 		display: none;
 	}
 
-	// The sidebar is the one scroller on the left. The outline inside it grows to
-	// its full height rather than getting a scrollbar of its own.
 	.sidebar.left {
 		overflow-y: auto;
 		scrollbar-width: none;
 
-		// The outline folds by shrinking .toc to its header, so leave .toc alone
-		// while it is folded.
 		.toc:not(:has(button.toc-header.collapsed)) {
 			flex: 0 0 auto;
 			overflow: visible;
@@ -25,9 +18,6 @@
 		}
 	}
 
-	// The right sidebar used to give the article its right margin and its width
-	// limit. Without it, give the article a reading width, about 90 characters at
-	// the article text size, centred in the room beside the sidebar, and a margin.
 	@media (min-width: 801px) {
 		.center {
 			box-sizing: border-box;
@@ -35,8 +25,6 @@
 		}
 	}
 
-	// Quartz gives the article and footer min-width: 100%, which has to go for the
-	// width limit to count.
 	@media (min-width: 1201px) {
 		.center,
 		footer {
@@ -58,9 +46,6 @@
 			"grid-sidebar-left grid-footer";
 	}
 
-	// From 1280px the right sidebar comes back, to hold the infobox. A page with no
-	// infobox (the home page and the hubs) keeps the two columns, so it does not
-	// reserve an empty strip on the right.
 	@media (min-width: 1280px) {
 		&:has(.sidebar.right .infobox) {
 			grid-template-columns: 320px minmax(0, 1fr) 21rem;
@@ -96,8 +81,6 @@
 	}
 }
 
-// The home page's own links (About, Site map) are not outline entries, so they
-// are not faded like the ones for sections that are out of view.
 ul.toc-content.overflow > li.site-link > a {
 	opacity: 0.85;
 }

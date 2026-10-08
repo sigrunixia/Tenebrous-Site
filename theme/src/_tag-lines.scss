@@ -2,9 +2,6 @@
 @use 'lib/functions' as *;
 @use 'lib/tag-lines' as *;
 
-// Status tag lines for Quartz. Obsidian selects them with :has(), which the
-// build avoids. Instead it adds tag-line and tl-<tag> to a line that starts with
-// a status tag, and tl-<tag> to every status tag pill.
 .markdown-reading-view {
 	@each $tag, $args in $statuses {
 		$color: list.nth($args, 1);
