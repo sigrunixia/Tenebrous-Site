@@ -113,7 +113,7 @@ cp theme/assets/favicon/favicon-*.png public/static/
 cp "theme/assets/favicon/favicon.ico" public/favicon.ico
 # Cloudflare merges its managed rules (the AI training bans) in front of this file.
 cp passes/data/robots.txt public/robots.txt
-ICONS='<link rel="icon" href="/favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png"><link rel="icon" type="image/png" sizes="196x196" href="/static/favicon-196x196.png"><link rel="apple-touch-icon" sizes="152x152" href="/static/favicon-152x152.png"><link rel="apple-touch-icon" sizes="167x167" href="/static/favicon-167x167.png"><link rel="apple-touch-icon" sizes="180x180" href="/static/favicon-180x180.png">'
+ICONS='<link rel="icon" href="/favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png"><link rel="icon" type="image/png" sizes="196x196" href="/static/favicon-196x196.png"><link rel="apple-touch-icon" sizes="180x180" href="/static/favicon-180x180.png">'
 find public -name '*.html' -exec perl -pi -e 'BEGIN{$i=shift} s{<link rel="icon" href="[^"]*static/icon\.png"/>}{$i}g' "$ICONS" {} +
 
 # Hub pages (the κόμβος class) and the landing page do not show the date and reading time.
