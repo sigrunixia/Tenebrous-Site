@@ -6,13 +6,15 @@ A note with a `cover` property gives Quartz the raw wikilink, so og:image reads
 This points the tags at the cover image in public/, with its real type and size.
 A cover that is not a photo (an SVG icon) falls back to the default preview image.
 
-usage: social-images.py public
+The alt text for the image is the note's `cover-alt`, read from the staged note.
+
+usage: social-images.py public .stage
 """
-import os, re, sys
+import html, os, re, sys
 from urllib.parse import quote
 from PIL import Image
 
-public = sys.argv[1]
+public, stage = sys.argv[1], sys.argv[2]
 SITE = "https://tenebrousdragon.com"
 FALLBACK = "static/og-image.png"
 TYPES = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp"}
@@ -43,6 +45,12 @@ for root, _, files in os.walk(public):
         with Image.open(os.path.join(public, rel)) as im:
             w, h = im.size
         url = f"{SITE}/{quote(rel)}"
+        note = os.path.join(stage, os.path.relpath(p, public)[:-5] + ".md")
+        if os.path.isfile(note):
+            fm = re.match(r"---\n(.*?)\n---", open(note, encoding="utf-8").read(), re.S)
+            alt = re.search(r'^cover-alt:\s*"?(.*?)"?\s*$', fm.group(1), re.M) if fm else None
+            if alt and alt.group(1):
+                t = re.sub(r'(<meta property="og:image:alt" content=")[^"]*("/>)', lambda a: a.group(1) + html.escape(alt.group(1), quote=True) + a.group(2), t, count=1)
         t = meta.sub(f'content="{url}"', t)
         t = re.sub(r'(<meta property="og:image:type" content=")[^"]*("/>)', rf'\g<1>{TYPES[ext]}\2', t)
         if 'property="og:image:width"' not in t:

@@ -116,8 +116,8 @@ cp passes/data/robots.txt public/robots.txt
 ICONS='<link rel="icon" href="/favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png"><link rel="icon" type="image/png" sizes="196x196" href="/static/favicon-196x196.png"><link rel="apple-touch-icon" sizes="180x180" href="/static/favicon-180x180.png">'
 find public -name '*.html' -exec perl -pi -e 'BEGIN{$i=shift} s{<link rel="icon" href="[^"]*static/icon\.png"/>}{$i}g' "$ICONS" {} +
 
-# Hub pages (the κόμβος class) and the landing page do not show the date and reading time.
-find public -name '*.html' -exec perl -0pi -e 's{<p show-comma="true" class="content-meta">.*?</p>}{}s if /<article class="[^"]*(?:κόμβος|landing)/' {} +
+# Hub pages (the hub or κόμβος class) and the landing page do not show the date and reading time.
+find public -name '*.html' -exec perl -0pi -e 's{<p show-comma="true" class="content-meta">.*?</p>}{}s if /<article class="[^"]*(?:κόμβος|hub|landing)/' {} +
 
 # Show dates on cards as plain dates, not full timestamps.
 find public -name '*.html' -exec perl -pi -e 's{(<span class="bases-text">\d{4}-\d{2}-\d{2})T[0-9:.+-Z]*(</span>)}{$1$2}g' {} +
@@ -141,4 +141,4 @@ python3 passes/home-links.py public
 python3 passes/external-links.py public
 
 # The preview image in each page's social tags (covers arrive as raw wikilinks).
-python3 passes/social-images.py public
+python3 passes/social-images.py public .stage
