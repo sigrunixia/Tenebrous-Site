@@ -1,5 +1,3 @@
-@use 'sass:list';
-@use 'sass:math';
 @use 'lib/palette' as p;
 @use 'site-palette' as s;
 
@@ -18,47 +16,6 @@ html.tenebrism body.theme-dark {
 	--link-color-hover: var(--cyan);
 	--link-external-color: var(--cyan);
 	--link-external-color-hover: var(--silver);
-}
-
-@function glow($size, $at, $r, $g, $b, $alpha, $stops: 12) {
-	$list: ();
-	@for $i from 0 through $stops {
-		$t: math.div($i, $stops);
-		$ease: 1 - $t * $t * (3 - 2 * $t);
-		$stop: 'rgb(#{$r} #{$g} #{$b} / #{math.div(math.round($alpha * $ease * 100000), 100000)}) #{math.div($i * 100, $stops)}%';
-		$list: list.append($list, #{$stop}, comma);
-	}
-	@return radial-gradient(ellipse #{$size} at #{$at}, $list);
-}
-
-html.tenebrism body {
-	background-image:
-		glow(28% 36%, 63% 30%, 255, 214, 140, 0.05),
-		glow(55% 65%, 63% 28%, 240, 176, 74, 0.07),
-		glow(95% 105%, 63% 30%, 122, 166, 230, 0.07);
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-}
-
-html.tenebrism.swirl body {
-	--swirl: max(130vw, 130vh);
-	background-image:
-		url("/static/swirl.svg"),
-		glow(95% 105%, 63% 30%, 122, 166, 230, 0.04);
-	background-size: var(--swirl) var(--swirl), auto;
-	background-position: calc(63vw - var(--swirl) / 2) calc(30vh - var(--swirl) / 2), 0 0;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-}
-
-html.tenebrism body::before {
-	content: "";
-	position: fixed;
-	inset: 0;
-	z-index: -1;
-	pointer-events: none;
-	opacity: 0.014;
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 html.tenebrism .bases-card {

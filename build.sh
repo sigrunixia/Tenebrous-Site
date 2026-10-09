@@ -15,8 +15,6 @@ stage/stage.sh
 cp "theme/assets/favicon/favicon-196x196.png" quartz/static/icon.png
 mkdir -p quartz/static/fonts && cp theme/assets/fonts/*.woff2 quartz/static/fonts/
 cp "${VAULT:-/Users/Signia/Vaults/Tenebrous}/Admin/Attachments/tenebrous-dragon.png" quartz/static/tenebrous-dragon.png
-# The swirl look's picture, used by the default look.
-cp "theme/assets/swirl.svg" quartz/static/swirl.svg
 npx quartz build -d .stage
 
 # The home note has permalink "home" and is staged as index.md, which Quartz
@@ -24,16 +22,11 @@ npx quartz build -d .stage
 
 # The theme's variables hang off .theme-dark. Put that class on <html> so
 # they reach Quartz's root variables.
-# Every build gets the tenebrism look with the swirl. TENEBRISM=1 is the preview: it
-# adds a noindex tag and lets ?look=spotlight switch to the plain spotlight.
-VARIANT=" tenebrism swirl"
+# Every build gets the tenebrism look. TENEBRISM=1 is the preview and adds a noindex tag.
+VARIANT=" tenebrism"
 find public -name '*.html' -exec sed -i '' "s/^<html lang=/<html class=\"theme-dark${VARIANT}\" lang=/" {} +
 if [ -n "${TENEBRISM:-}" ]; then
   find public -name '*.html' -exec sed -i '' 's#<head>#<head><meta name="robots" content="noindex">#' {} +
-  # ?look=spotlight swaps the swirl for the plain spotlight for the session, and
-  # ?look=swirl brings it back. The class is put back after each in-site navigation.
-  LOOK='<script>(function(){var k="look",q=new URLSearchParams(location.search).get(k);if(q){try{sessionStorage.setItem(k,q)}catch(e){}}var on=function(){var v;try{v=sessionStorage.getItem(k)}catch(e){}document.documentElement.classList.toggle("swirl",v!=="spotlight")};on();document.addEventListener("nav",on)})()</script>'
-  find public -name '*.html' -exec perl -pi -e "s#<head>#<head>$LOOK#" {} +
 fi
 
 # The theme's selectors expect Obsidian's reading-view class on the rendered

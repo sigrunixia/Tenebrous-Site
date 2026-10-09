@@ -2581,31 +2581,6 @@ html.tenebrism body.theme-dark {
   --link-external-color-hover: var(--silver);
 }
 
-html.tenebrism body {
-  background-image: radial-gradient(ellipse 28% 36% at 63% 30%, rgb(255 214 140 / 0.05) 0%, rgb(255 214 140 / 0.04902) 8.3333333333%, rgb(255 214 140 / 0.0463) 16.6666666667%, rgb(255 214 140 / 0.04219) 25%, rgb(255 214 140 / 0.03704) 33.3333333333%, rgb(255 214 140 / 0.03119) 41.6666666667%, rgb(255 214 140 / 0.025) 50%, rgb(255 214 140 / 0.01881) 58.3333333333%, rgb(255 214 140 / 0.01296) 66.6666666667%, rgb(255 214 140 / 0.00781) 75%, rgb(255 214 140 / 0.0037) 83.3333333333%, rgb(255 214 140 / 0.00098) 91.6666666667%, rgb(255 214 140 / 0) 100%), radial-gradient(ellipse 55% 65% at 63% 28%, rgb(240 176 74 / 0.07) 0%, rgb(240 176 74 / 0.06862) 8.3333333333%, rgb(240 176 74 / 0.06481) 16.6666666667%, rgb(240 176 74 / 0.05906) 25%, rgb(240 176 74 / 0.05185) 33.3333333333%, rgb(240 176 74 / 0.04367) 41.6666666667%, rgb(240 176 74 / 0.035) 50%, rgb(240 176 74 / 0.02633) 58.3333333333%, rgb(240 176 74 / 0.01815) 66.6666666667%, rgb(240 176 74 / 0.01094) 75%, rgb(240 176 74 / 0.00519) 83.3333333333%, rgb(240 176 74 / 0.00138) 91.6666666667%, rgb(240 176 74 / 0) 100%), radial-gradient(ellipse 95% 105% at 63% 30%, rgb(122 166 230 / 0.07) 0%, rgb(122 166 230 / 0.06862) 8.3333333333%, rgb(122 166 230 / 0.06481) 16.6666666667%, rgb(122 166 230 / 0.05906) 25%, rgb(122 166 230 / 0.05185) 33.3333333333%, rgb(122 166 230 / 0.04367) 41.6666666667%, rgb(122 166 230 / 0.035) 50%, rgb(122 166 230 / 0.02633) 58.3333333333%, rgb(122 166 230 / 0.01815) 66.6666666667%, rgb(122 166 230 / 0.01094) 75%, rgb(122 166 230 / 0.00519) 83.3333333333%, rgb(122 166 230 / 0.00138) 91.6666666667%, rgb(122 166 230 / 0) 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-
-html.tenebrism.swirl body {
-  --swirl: max(130vw, 130vh);
-  background-image: url("/static/swirl.svg"), radial-gradient(ellipse 95% 105% at 63% 30%, rgb(122 166 230 / 0.04) 0%, rgb(122 166 230 / 0.03921) 8.3333333333%, rgb(122 166 230 / 0.03704) 16.6666666667%, rgb(122 166 230 / 0.03375) 25%, rgb(122 166 230 / 0.02963) 33.3333333333%, rgb(122 166 230 / 0.02495) 41.6666666667%, rgb(122 166 230 / 0.02) 50%, rgb(122 166 230 / 0.01505) 58.3333333333%, rgb(122 166 230 / 0.01037) 66.6666666667%, rgb(122 166 230 / 0.00625) 75%, rgb(122 166 230 / 0.00296) 83.3333333333%, rgb(122 166 230 / 0.00079) 91.6666666667%, rgb(122 166 230 / 0) 100%);
-  background-size: var(--swirl) var(--swirl), auto;
-  background-position: calc(63vw - var(--swirl) / 2) calc(30vh - var(--swirl) / 2), 0 0;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-
-html.tenebrism body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.014;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
 html.tenebrism .bases-card {
   background-image: linear-gradient(180deg, rgba(122, 166, 230, 0.08), transparent 65%);
 }

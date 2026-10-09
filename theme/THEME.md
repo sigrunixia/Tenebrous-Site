@@ -2,13 +2,13 @@
 
 This is the Quartz half of the Tenebrous theme. [Tenebrous-Obsidian](https://github.com/sigrunixia/Tenebrous-Obsidian) is the Obsidian half, and it mostly works on Obsidian Publish too. Anything only Quartz needs lives here. The palette, typography, dark theme and callouts are shared, so Sass reads those from the Obsidian repo. The colours only the site uses are in `src/_site-palette.scss`, written by hand and listed at the end of this file.
 
-The SCSS is in `src/`, starting at `main.scss`. `build.sh` compiles it to `tenebrous.css` and copies that into Quartz, so edit the SCSS and never the compiled file. The fonts, `swirl.svg` and the favicons are in `assets/`.
+The SCSS is in `src/`, starting at `main.scss`. `build.sh` compiles it to `tenebrous.css` and copies that into Quartz, so edit the SCSS and never the compiled file. The fonts and the favicons are in `assets/`.
 
 The CSS does very little by itself, because most of it styles classes that get added after Quartz has built the page. Here is what adds what.
 
 | Class | Added by | What it is |
 | --- | --- | --- |
-| `theme-dark`, `tenebrism`, `swirl`, `home` on `<html>` | `build.sh` | The palette, the look, and the home page layout |
+| `theme-dark`, `tenebrism`, `home` on `<html>` | `build.sh` | The palette, the look, and the home page layout |
 | `markdown-reading-view` | `build.sh` | Lets Obsidian's reading-view styles apply |
 | `breadcrumb` | `build.sh` | The breadcrumb line at the top of a note |
 | `external`, `external-icon` | Quartz, and `passes/external-links.py` for the arrow, the new tab and the label | A link to another website, in cyan with an arrow |
