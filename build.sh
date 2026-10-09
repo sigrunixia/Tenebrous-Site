@@ -121,6 +121,9 @@ python3 passes/graph-button.py public
 # A back-to-top button and a phone outline.
 python3 passes/page-nav.py public
 
+# Click to zoom on images in a note.
+python3 passes/lightbox.py public
+
 # Accessibility fixes (landmarks, language, labels), last so it sees the final markup.
 python3 a11y/a11y-fix.py public
 

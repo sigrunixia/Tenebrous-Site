@@ -23,6 +23,7 @@ The CSS does very little by itself, because most of it styles classes that get a
 | `bases-group-heading` | `passes/bases-groups.py` | Year headings in a Bases list |
 | `bases-card-image`, `--cover` | `build.sh`, `passes/card-covers.py` | The blurred cover behind a card image |
 | `bases-card-placeholder` | `passes/card-covers.py` | The compass on a trip card with no cover |
+| `data-zoom` on an image, `lightbox`, `lightbox-close` | `quartz/static/lightbox.js`, added by `passes/lightbox.py` | Click an image in a note to see it full size |
 | `skip-link`, `visually-hidden` | `a11y/a11y-fix.py` | The skip link, and text only a screen reader sees |
 
 ## Colours only the site uses
