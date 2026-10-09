@@ -1681,6 +1681,7 @@ ul.toc-content.overflow > li.site-link > a {
 
 .canvas-footer {
   position: fixed;
+  margin: 0;
   right: 0;
   bottom: 0;
   left: 0;
