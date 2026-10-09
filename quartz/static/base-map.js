@@ -78,9 +78,13 @@
     var map = L.map(el, { zoomSnap: 0.25, zoomDelta: 0.5, wheelPxPerZoomLevel: 120, maxBounds: WORLD, maxBoundsViscosity: 1 });
     // Fill the map with the world (no snapping), so no empty strip shows at the edges.
     // The view always sits inside WORLD, which is wider than the box is tall.
+    // A hair over the exact fit, because rounding to whole pixels can leave a one pixel sliver.
+    function coverZoom() {
+      return map.getBoundsZoom(WORLD, true) + 0.01;
+    }
     function fitWorld(setMin) {
       map.options.zoomSnap = 0;
-      map.setView(L.latLngBounds(WORLD).getCenter(), map.getBoundsZoom(WORLD, true), { animate: false });
+      map.setView(L.latLngBounds(WORLD).getCenter(), coverZoom(), { animate: false });
       map.options.zoomSnap = 0.25;
       if (setMin) map.setMinZoom(map.getZoom());
     }
@@ -114,7 +118,7 @@
       new ResizeObserver(function () {
         map.invalidateSize();
         map.options.zoomSnap = 0;
-        var fit = map.getBoundsZoom(WORLD, true);
+        var fit = coverZoom();
         map.options.zoomSnap = 0.25;
         if (map.getZoom() <= map.getMinZoom() + 0.01 || map.getZoom() < fit) fitWorld(true);
         else map.setMinZoom(fit);
