@@ -1,0 +1,76 @@
+.site-dragon {
+	padding: 0 0 0.75rem;
+
+	img {
+		display: block;
+		width: 45%;
+		max-width: 140px;
+		height: auto;
+		margin: 0 auto;
+	}
+}
+
+.site-social-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	justify-content: center;
+}
+
+.toc,
+.site-nav {
+	h2 {
+		font-size: 1rem;
+		color: var(--amber);
+		margin: 0.5rem 0;
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		font-size: 0.95rem;
+	}
+
+	li {
+		margin: 0.2rem 0;
+	}
+
+	.depth-3 {
+		padding-left: 1rem;
+	}
+
+	a {
+		text-decoration: none;
+	}
+}
+
+// The short list that stands in for the sidebar one on narrow screens.
+.page-outline-mobile {
+	display: none;
+	margin: 1rem 0;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	background: var(--bg-raised);
+
+	summary {
+		padding: 0.5rem 0.8rem;
+		color: var(--amber);
+		font-weight: 600;
+		cursor: pointer;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0 0.8rem 0.6rem 1.8rem;
+		font-size: 0.95rem;
+	}
+
+	li {
+		margin: 0.25rem 0;
+	}
+
+	.depth-3 {
+		margin-left: 1rem;
+	}
+}

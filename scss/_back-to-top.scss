@@ -1,0 +1,18 @@
+.back-to-top {
+	position: fixed;
+	right: 1rem;
+	bottom: 1rem;
+	width: 2.6rem;
+	height: 2.6rem;
+	border: 1px solid var(--edge);
+	border-radius: 50%;
+	background: var(--bg-raised);
+	color: var(--text-normal);
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+
+	&[hidden] {
+		display: none;
+	}
+}

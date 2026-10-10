@@ -1,0 +1,16 @@
+pre {
+	margin: 1rem 0;
+	padding: 0.9rem 1rem;
+	overflow: auto;
+	background: var(--bg-raised);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	color: var(--text-normal);
+	font-size: 0.9rem;
+	line-height: 1.5;
+
+	code {
+		background: none;
+		font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+	}
+}

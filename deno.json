@@ -1,0 +1,10 @@
+{
+  "imports": {
+    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.3.2/"
+  },
+  "lock": false,
+  "tasks": {
+    "build": "deno run --allow-read --allow-write=. --allow-net --allow-env --allow-import --allow-run=git lume/cli.ts",
+    "serve": "deno run --allow-read --allow-write=. --allow-net --allow-env --allow-import --allow-run=git lume/cli.ts -s"
+  }
+}

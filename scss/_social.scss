@@ -1,0 +1,82 @@
+// What each social icon turns into on hover or keyboard focus. The brands with a colour logo show it; the others use the site palette.
+@mixin on-hover {
+	&:hover,
+	&:focus-visible {
+		@content;
+	}
+}
+
+.site-social-link {
+	color: var(--text-muted);
+	transition: color 0.2s ease;
+
+	&:hover {
+		color: var(--silver);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+}
+
+html.tenebrism .site-social-link {
+	&[title="Instagram"] {
+		@include on-hover {
+			svg path {
+				fill: url(#instagram-gradient);
+			}
+		}
+	}
+
+	&[title="Facebook"] {
+		@include on-hover {
+			color: #0866ff;
+
+			svg {
+				background: #fff;
+				border-radius: 50%;
+			}
+		}
+	}
+
+	&[title="RSS feed"] {
+		@include on-hover {
+			color: #fff;
+			background: #f26522;
+			box-shadow: 0 0 0 0.22rem #f26522;
+			border-radius: 0.3rem;
+		}
+	}
+
+	&[title="GitHub"] {
+		@include on-hover {
+			color: #181717;
+			background: #fff;
+			box-shadow: 0 0 0 0.2rem #fff;
+			border-radius: 50%;
+		}
+	}
+
+	&[title="Threads"] {
+		@include on-hover {
+			color: #fff;
+			background: #000;
+			box-shadow: 0 0 0 0.22rem #000;
+			border-radius: 0.3rem;
+			outline: 1px solid rgb(255 255 255 / 0.35);
+			outline-offset: 0.22rem;
+		}
+	}
+
+	&[title="Email"] {
+		@include on-hover {
+			color: var(--amber);
+		}
+	}
+
+	&[title="CV"] {
+		@include on-hover {
+			color: var(--teal);
+		}
+	}
+}

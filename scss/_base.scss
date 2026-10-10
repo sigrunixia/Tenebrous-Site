@@ -1,0 +1,44 @@
+@use 'lib/typography' as t;
+@use 'site-palette' as s;
+
+:root {
+	--edge: #{s.$edge};
+	--edge-high: #{s.$edge-high};
+	--faint-high: #{s.$faint-high};
+	--text-high: #{s.$text-high};
+	--shadow-line: #{s.$shadow-line};
+	--brown: #{s.$brown};
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text-normal);
+	font-family: t.$sans;
+	font-size: 1.1rem;
+	line-height: 1.6;
+}
+
+a {
+	color: var(--blue);
+	font-weight: 500;
+	text-decoration: none;
+	transition: color 0.2s ease;
+
+	&:hover {
+		color: var(--cyan);
+	}
+}
+
+h1 { color: var(--silver); }
+h2 { color: var(--amber); }
+h3 { color: var(--blue); }
+
+code,
+pre {
+	font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+}

@@ -37,6 +37,9 @@ for n in "${notes[@]}"; do
   copy "$n"
 done
 
+# Tags are a line in the note body in the vault. Quartz wants them in frontmatter.
+python3 "$HERE/stage-tags.py" "$STAGE"
+
 # Make each permalink the page's URL, rewrite links to match, and drop aliases
 # that would overwrite a page with a redirect.
 python3 "$HERE/stage-permalinks.py" "$STAGE"

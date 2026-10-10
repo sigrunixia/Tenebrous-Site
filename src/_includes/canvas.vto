@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" class="theme-dark tenebrism canvas-frame">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} | Tenebrous Dragon</title>
+  <link rel="stylesheet" href="/site.css">
+  <script src="/static/canvas.js" defer></script>
+  <script src="/static/search.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><a class="site-header-text" href="/">A Tenebrous Dragon</a></header>
+  <div class="page canvas-layout">
+    <div class="sidebar left">
+      <nav aria-label="Site" style="display:contents">
+      <div class="site-dragon"><img src="/static/tenebrous-dragon.png" alt="" width="520" height="567"></div>
+      {{ include "social.html" }}
+      <button type="button" class="search-button" aria-label="Search (press /)"><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>Search</span><kbd>/</kbd></button>
+      </nav>
+    </div>
+    <main class="canvas-stage"><h1 class="visually-hidden">{{ title }}</h1>{{ content }}</main>
+  </div>
+  <footer class="canvas-footer">
+    <p>© 2026 <a href="/sigrunixia/">Rebbecca Bishop (Sigrunixia)</a></p>
+    <p>Updated {{ buildDate }}{{ if commitCount }} - Commit <a href="https://github.com/sigrunixia/Tenebrous-Site/commit/{{ commitHash }}">{{ commitCount }}</a>{{ /if }}</p>
+    <ul><li><a href="/about-this-site/">About this site</a></li><li><a href="/site-map/">Site map</a></li><li><a href="/privacy-notice/">Privacy</a></li></ul>
+  </footer>
+</body>
+</html>

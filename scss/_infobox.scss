@@ -1,0 +1,45 @@
+.infobox {
+	background: var(--bg-raised);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	overflow: hidden;
+
+	img {
+		width: 100%;
+		display: block;
+	}
+
+	dl {
+		margin: 0;
+		padding: 0.5rem 0.8rem;
+
+		div {
+			margin: 0.5rem 0;
+		}
+	}
+
+	dt {
+		color: var(--amber);
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	dd {
+		margin: 0;
+	}
+}
+
+.infobox-credit {
+	margin: 0.3rem 0.8rem;
+	color: var(--text-faint);
+	font-size: 0.8rem;
+}
+
+.infobox-note {
+	color: var(--text-faint);
+}
+
+.infobox-inline {
+	display: none;
+}

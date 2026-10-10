@@ -1,0 +1,28 @@
+.callout {
+	border-left: 3px solid var(--edge);
+	background: var(--bg-raised);
+	margin: 1rem 0;
+	padding: 0.5rem 1rem;
+}
+
+.callout-title {
+	color: var(--amber);
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.callout-title-inner p {
+	margin: 0;
+}
+
+.callout-content {
+	> :first-child {
+		margin-top: 0;
+	}
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+}

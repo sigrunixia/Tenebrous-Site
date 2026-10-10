@@ -1,9 +1,0 @@
-# An unlisted preview of the site, for trying design changes before they go live.
-# No custom domain. Pages carry a noindex tag (see TENEBRISM in build.sh).
-name = "tenebrous-preview"
-compatibility_date = "2026-10-07"
-workers_dev = true
-
-[assets]
-directory = "./public"
-not_found_handling = "404-page"

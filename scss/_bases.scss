@@ -1,0 +1,65 @@
+.bases-view-meta {
+	color: var(--text-faint);
+	font-size: 0.85rem;
+	margin: 0.5rem 0;
+}
+
+.bases-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 0.75rem;
+	margin: 1rem 0;
+}
+
+.bases-group-heading {
+	grid-column: 1 / -1;
+	margin: 0.8rem 0 0;
+	font-size: 1.1rem;
+}
+
+.bases-card {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border-radius: 8px;
+	background: var(--background-secondary);
+	color: var(--text-normal);
+	text-decoration: none;
+}
+
+.bases-card-image {
+	aspect-ratio: 4 / 3;
+	background: var(--background-modifier-border);
+
+	img {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+}
+
+.bases-card-body {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.bases-card-title {
+	padding: 0.5rem 0.5rem 0;
+	font-weight: 600;
+}
+
+.bases-card-meta {
+	padding: 0.2rem 0.5rem 0.6rem;
+	font-size: 0.85rem;
+	color: var(--text-muted);
+}
+
+.bases-card-row {
+	display: flex;
+	gap: 0.4rem;
+}
+
+.bases-card-label {
+	color: var(--text-faint);
+}

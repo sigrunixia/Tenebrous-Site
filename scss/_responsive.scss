@@ -1,0 +1,71 @@
+// Under 1200px the three columns stack, and the sidebar becomes a compact row above the note.
+@media (max-width: 1200px) {
+	.page,
+	.page:has(.infobox) {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"left"
+			"center"
+			"right"
+			"footer";
+	}
+
+	.sidebar.left {
+		position: static;
+		max-height: none;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		gap: 0.5rem 1rem;
+	}
+
+	.sidebar.right {
+		padding: 0 2rem;
+		display: none;
+	}
+
+	.site-dragon {
+		padding: 0;
+
+		img {
+			width: 52px;
+		}
+	}
+
+	.site-social-links {
+		padding: 0;
+	}
+
+	.search-button {
+		flex: 1 1 100%;
+	}
+
+	.sidebar.left .toc {
+		display: none;
+	}
+
+	.site-nav {
+		flex: 1 1 100%;
+
+		h2 {
+			display: none;
+		}
+
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 0.3rem 1.2rem;
+		}
+	}
+
+	.page-outline-mobile {
+		display: block;
+	}
+
+	.infobox-inline {
+		display: block;
+		margin: 1rem 0;
+	}
+}
