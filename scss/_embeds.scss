@@ -1,0 +1,26 @@
+// A part of another note brought in with ![[Note#Heading]], marked by a line down the side and a link to where it came from.
+.markdown-embed {
+	margin: 1rem 0;
+	padding-left: 1rem;
+	border-left: 2px solid var(--edge);
+
+	> :first-child {
+		margin-top: 0;
+	}
+}
+
+.embed-source {
+	margin: 0.5rem 0 0;
+	color: var(--text-faint);
+	font-size: 0.85em;
+}
+
+// On a hub card the embed is the card's own text, so it takes no line or source link.
+.callout[data-callout^="hub-"] .markdown-embed {
+	padding-left: 0;
+	border-left: 0;
+
+	.embed-source {
+		display: none;
+	}
+}

@@ -8,6 +8,7 @@ import { headersFile, llmsTxt, robotsTxt, SITE, tdmrepFile } from "./lib/rights.
 import { renderBase, type MapPayload, type Note, type Resolve } from "./lib/bases.ts";
 import { headingId, noteUrl, slugOf, titleOf } from "./lib/notes.ts";
 import { embeds, footnotes, markTasks, outsideCode, tasks } from "./lib/markdown.ts";
+import { transclude, type Source, withoutBlockIds } from "./lib/transclude.ts";
 import { redirects } from "./lib/redirects.ts";
 import { externalLinks, greekLang, uniqueIds } from "./lib/polish.ts";
 import { renderCanvas, slug as canvasSlug } from "./lib/canvas.ts";
@@ -91,10 +92,14 @@ site.preprocess([".md"], (pages) => {
     if (note !== "index" && !known.has(noteUrl(note))) return `<span class="unresolved" title="No page on the site">${name}</span>`;
     return `[${name}](${note === "index" ? "/" : noteUrl(note)}${anchor})`;
   };
+  // Every note as it was written, so an embed brings in the original and not a part already rewritten.
+  const raw = new Map<string, Source>();
+  for (const p of pages) if (typeof p.data.content === "string") raw.set(noteUrl(p.src.path), { body: p.data.content, url: noteUrl(p.src.path), title: titleOf(p.data, p.src.path) });
+  const find = (note: string) => raw.get(noteUrl(note));
   for (const page of pages) {
     let c = page.data.content as string;
     if (typeof c !== "string") continue;
-    c = outsideCode(c, (text) => tasks(footnotes(embeds(text))));
+    c = outsideCode(c, (text) => tasks(footnotes(embeds(withoutBlockIds(transclude(text, find))))));
     c = c.replace(/```base\n([\s\S]*?)```/g, (_, src) => `\n\n${renderBase(src, notes, context)}\n\n`);
     // [[target|Name]] links to a published note, or to a heading in one. A note that is not on the site stays plain text.
     c = c.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, (_, target, name) => link(target, name));
