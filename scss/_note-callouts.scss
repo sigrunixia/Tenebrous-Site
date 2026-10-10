@@ -13,6 +13,17 @@
 	gap: 0.5rem;
 }
 
+// The icon is a mask of --callout-icon, filled with the callout's colour.
+.callout-icon {
+	--icon-size: 18px;
+	flex: 0 0 var(--icon-size);
+	width: var(--icon-size);
+	height: var(--icon-size);
+	background-color: var(--color, currentColor);
+	mask: var(--callout-icon) center / var(--icon-size) var(--icon-size) no-repeat;
+	-webkit-mask: var(--callout-icon) center / var(--icon-size) var(--icon-size) no-repeat;
+}
+
 .callout-title-inner p {
 	margin: 0;
 }
