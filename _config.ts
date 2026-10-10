@@ -136,7 +136,9 @@ site.process([".html"], (pages) => {
     const doc = page.document;
     const art = doc?.querySelector("article");
     if (!doc || !art || art.querySelector("h1") ) continue;
-    art.innerHTML = `<h1 class="article-title">${titleOf(page.data, page.src.path)}</h1>` + art.innerHTML;
+    const h1 = `<h1 class="article-title">${titleOf(page.data, page.src.path)}</h1>`;
+    const crumb = art.innerHTML.match(/^\s*<p><a href="\/">Home<\/a>.*?<\/p>/s);
+    art.innerHTML = crumb ? crumb[0] + h1 + art.innerHTML.slice(crumb[0].length) : h1 + art.innerHTML;
   }
 });
 

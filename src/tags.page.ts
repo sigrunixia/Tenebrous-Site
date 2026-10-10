@@ -20,7 +20,7 @@ export default function* ({ search }: Lume.Data) {
     yield {
       url: `/tags/${tag.toLowerCase().replace(/ /g, "-")}/`,
       title: `Tag: ${tag}`,
-      content: `<h1 class="article-title">Tag: ${tag}</h1><div class="bases-cards">${cards}</div>`,
+      content: `<p><a href="/">Home</a> / Tag: ${tag}</p><h1 class="article-title">Tag: ${tag}</h1><div class="bases-cards">${cards}</div>`,
     };
   }
 }

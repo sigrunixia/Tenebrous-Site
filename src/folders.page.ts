@@ -21,6 +21,12 @@ export default function* ({ search }: Lume.Data) {
     const direct = list.filter((p) => decodeURI(String(p.url)).split("/").filter(Boolean).length === dir.split("/").filter(Boolean).length + 1);
     const cards = direct.sort((a, b) => titleOf(a, a.url).localeCompare(titleOf(b, b.url)))
       .map((p) => `<a href="${p.url}" class="bases-card"><div class="bases-card-body"><span class="bases-card-title">${titleOf(p, p.url)}</span></div></a>`).join("");
-    yield { url: dir, title, content: `<h1 class="article-title">${title}</h1><div class="bases-cards">${cards}</div>` };
+    const trail = dir.split("/").filter(Boolean).map((seg, i, all) => {
+      const d = "/" + all.slice(0, i + 1).join("/") + "/";
+      const label = decodeURIComponent(seg)[0].toUpperCase() + decodeURIComponent(seg).slice(1);
+      return folders.has(d) && !d.startsWith("/tags/") ? `<a href="${d}">${label}</a>` : label;
+    });
+    const crumbs = `<p><a href="/">Home</a> / ${trail.join(" / ")}</p>`;
+    yield { url: dir, title, content: `${crumbs}<h1 class="article-title">${title}</h1><div class="bases-cards">${cards}</div>` };
   }
 }
