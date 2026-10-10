@@ -2,7 +2,7 @@
 @media (max-width: 1200px) {
 	.page,
 	.page:has(.infobox) {
-		grid-template-columns: 1fr;
+		grid-template-columns: minmax(0, 1fr);
 		grid-template-areas:
 			"left"
 			"center"

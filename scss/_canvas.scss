@@ -10,7 +10,7 @@
 	}
 
 	@media (max-width: 800px) {
-		grid-template-columns: 1fr;
+		grid-template-columns: minmax(0, 1fr);
 		grid-template-areas: "stage";
 
 		.sidebar.left {
