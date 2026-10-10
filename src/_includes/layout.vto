@@ -8,6 +8,11 @@
   {{ set img = typeof socialImage === "function" ? socialImage(it) : socialImage }}
   {{ set imgAlt = typeof socialAlt === "function" ? socialAlt(it) : socialAlt }}
   <link rel="canonical" href="https://tenebrousdragon.com{{ url }}">
+  <link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <meta name="author" content="Rebbecca Bishop (Sigrunixia)">
+  <meta name="tdm-reservation" content="1">
+  <meta name="tdm-policy" content="https://tenebrousdragon.com/works/">
+  <script type="application/ld+json">{{ typeof jsonLd === "function" ? jsonLd(it) : "" |> safe }}</script>
   <link rel="alternate" type="application/rss+xml" title="Tenebrous Dragon" href="/index.xml">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
@@ -53,10 +58,10 @@
     </main>
     <div class="sidebar right"></div>
     <footer>
-      <p>© 2026 <a href="/sigrunixia/">Rebbecca Bishop (Sigrunixia)</a></p>
+      <p>© 2026 <a href="/sigrunixia/">Rebbecca Bishop (Sigrunixia)</a>, <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license" class="external">CC BY-NC-SA 4.0</a> unless credited otherwise. <a href="/works/">Works and licence</a></p>
       <p>Written in <a href="https://obsidian.md" class="external">Obsidian</a>, Hosted on <a href="https://www.cloudflare.com" class="external">Cloudflare</a> via <a href="https://lume.land" class="external">Lume</a>, and still holding.</p>
       <p>Updated {{ buildDate }}{{ if commitCount }} - Commit <a href="https://github.com/sigrunixia/Tenebrous-Site/commit/{{ commitHash }}">{{ commitCount }}</a>{{ /if }}</p>
-      <ul><li><a href="/about-this-site/">About this site</a></li><li><a href="/site-map/">Site map</a></li><li><a href="/privacy-notice/">Privacy</a></li></ul>
+      <ul><li><a href="/about-this-site/">About this site</a></li><li><a href="/works/">Works</a></li><li><a href="/site-map/">Site map</a></li><li><a href="/privacy-notice/">Privacy</a></li></ul>
     </footer>
   </div>
   <button type="button" class="back-to-top" aria-label="Back to top" hidden><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></button>

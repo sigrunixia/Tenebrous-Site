@@ -1,4 +1,5 @@
 import { coverCard, noteUrl } from "../lib/notes.ts";
+export { jsonLd } from "../lib/rights.ts";
 
 export const layout = "layout.vto";
 const now = new Date();

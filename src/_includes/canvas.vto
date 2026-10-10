@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ (title) == "Tenebrous Dragon" ? "A Tenebrous Dragon" : (title) + " | Tenebrous Dragon" }}</title>
+  <link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <meta name="author" content="Rebbecca Bishop (Sigrunixia)">
+  <meta name="tdm-reservation" content="1">
+  <meta name="tdm-policy" content="https://tenebrousdragon.com/works/">
   <link rel="stylesheet" href="/site.css">
   <script src="/static/canvas.js" defer></script>
   <script src="/static/search.js" defer></script>
@@ -21,9 +25,9 @@
     <main class="canvas-stage"><h1 class="visually-hidden">{{ title }}</h1>{{ content }}</main>
   </div>
   <footer class="canvas-footer">
-    <p>© 2026 <a href="/sigrunixia/">Rebbecca Bishop (Sigrunixia)</a></p>
+    <p>© 2026 <a href="/sigrunixia/">Rebbecca Bishop (Sigrunixia)</a>, <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license" class="external">CC BY-NC-SA 4.0</a> unless credited otherwise. <a href="/works/">Works and licence</a></p>
     <p>Updated {{ buildDate }}{{ if commitCount }} - Commit <a href="https://github.com/sigrunixia/Tenebrous-Site/commit/{{ commitHash }}">{{ commitCount }}</a>{{ /if }}</p>
-    <ul><li><a href="/about-this-site/">About this site</a></li><li><a href="/site-map/">Site map</a></li><li><a href="/privacy-notice/">Privacy</a></li></ul>
+    <ul><li><a href="/about-this-site/">About this site</a></li><li><a href="/works/">Works</a></li><li><a href="/site-map/">Site map</a></li><li><a href="/privacy-notice/">Privacy</a></li></ul>
   </footer>
 </body>
 </html>

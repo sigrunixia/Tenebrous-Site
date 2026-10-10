@@ -1,10 +1,10 @@
 import lume from "lume/mod.ts";
 import { Page } from "lume/core/file.ts";
 import feed from "lume/plugins/feed.ts";
-import robots from "lume/plugins/robots.ts";
 import slugifyUrls from "lume/plugins/slugify_urls.ts";
 import checkUrls from "lume/plugins/check_urls.ts";
 import sitemap from "lume/plugins/sitemap.ts";
+import { headersFile, llmsTxt, robotsTxt, SITE, tdmrepFile } from "./lib/rights.ts";
 import { renderBase, type MapPayload, type Note, type Resolve } from "./lib/bases.ts";
 import { headingId, noteUrl, slugOf, titleOf } from "./lib/notes.ts";
 import { embeds, footnotes, markTasks, outsideCode, tasks } from "./lib/markdown.ts";
@@ -48,7 +48,6 @@ site.preprocess([".html"], (pages) => {
   for (const page of pages) page.data.url = decodeURI(page.data.url);
 });
 site.use(sitemap());
-site.use(robots({ allow: "*", sitemap: "https://tenebrousdragon.com/sitemap.xml" }));
 site.use(feed({
   output: "/index.xml",
   query: "publish=true",
@@ -224,6 +223,18 @@ site.process([".html"], (pages) => {
 });
 site.addEventListener("beforeSave", () => {
   site.pages.push(Page.create({ url: "/static/search-index.json", content: JSON.stringify(entries) }));
+  // The rights files: the licence and AI-training reservation as headers, as a file, and as a guide for assistants.
+  const listed = site.pages.filter((p) => p.data.url && p.data.publish && p.src.path).map((p) => ({
+    url: p.data.url as string,
+    title: titleOf(p.data, p.src.path),
+    description: String(p.data.description ?? ""),
+  }));
+  // The sitemap plugin has already started robots.txt with its Sitemap line, so these go above it.
+  const robotsPage = site.pages.find((p) => p.data.url === "/robots.txt");
+  if (robotsPage) robotsPage.text = robotsTxt + robotsPage.text; else site.pages.push(Page.create({ url: "/robots.txt", content: robotsTxt + `Sitemap: ${SITE}/sitemap.xml\n` }));
+  site.pages.push(Page.create({ url: "/_headers", content: headersFile }));
+  site.pages.push(Page.create({ url: "/.well-known/tdmrep.json", content: tdmrepFile }));
+  site.pages.push(Page.create({ url: "/llms.txt", content: llmsTxt(listed) }));
 });
 
 // External links, then the Greek marks, last so they see the final markup.
