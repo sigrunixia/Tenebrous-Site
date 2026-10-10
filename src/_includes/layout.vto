@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title ?? basename }} | Tenebrous Dragon</title>
+  <title>{{ (title ?? basename) == "Tenebrous Dragon" ? "Tenebrous Dragon" : (title ?? basename) + " | Tenebrous Dragon" }}</title>
   {{ if description }}<meta name="description" content="{{ description }}">{{ /if }}
   {{ set img = typeof socialImage === "function" ? socialImage(it) : socialImage }}
   {{ set imgAlt = typeof socialAlt === "function" ? socialAlt(it) : socialAlt }}
