@@ -9,6 +9,13 @@ export const slugOf = (name: string) => decodeURI(slugify(name));
 // Image files keep the names the staging step gave them.
 export const fileSlug = (name: string) => name.toLowerCase().replace(/ /g, "-").replace(/&/g, "-and-").replace(/-+/g, "-").replace(/^-|-$/g, "");
 
+// The file served for an embedded picture. Photos and screenshots are resized and written as WebP by sync.sh,
+// under the original name with .webp added (photo.jpeg is photo.jpeg.webp). SVGs, GIFs and WebP keep their names.
+export const imageFile = (name: string) => {
+  const file = fileSlug(name);
+  return /\.(png|jpe?g|avif)$/i.test(file) ? file + ".webp" : file;
+};
+
 // The staging step names each file after its address, folders included (places/athens), so the
 // path under notes/ is the address. Quartz lower-cases it and turns spaces into hyphens.
 export function noteUrl(srcPath: string) {

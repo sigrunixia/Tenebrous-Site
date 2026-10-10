@@ -1,5 +1,7 @@
 // An Obsidian canvas (JSON Canvas) as HTML. Text, file (image) and group nodes are placed where
 // the canvas puts them; a script adds pan and zoom. The canvas colour presets use the palette.
+import { imageFile } from "./notes.ts";
+
 type Node = { id: string; type: string; x: number; y: number; width: number; height: number; text?: string; file?: string; label?: string; color?: string; url?: string };
 type Canvas = { nodes: Node[] };
 
@@ -33,7 +35,7 @@ export function renderCanvas(json: Canvas, title: string) {
     const hue = n.color && HUES[n.color] ? ` canvas-${HUES[n.color]}` : "";
     const style = `left:${n.x - minX + pad}px;top:${n.y - minY + pad}px;width:${n.width}px;height:${n.height}px`;
     if (n.type === "group") return `<div class="canvas-node canvas-group${hue}" style="${style}"><span class="canvas-label">${esc(n.label ?? "")}</span></div>`;
-    if (n.type === "file") return `<div class="canvas-node canvas-file${hue}" style="${style}"><img src="/img/${slug(n.file!.split("/").pop()!)}" alt="" loading="lazy" draggable="false"></div>`;
+    if (n.type === "file") return `<div class="canvas-node canvas-file${hue}" style="${style}"><img src="/img/${imageFile(n.file!.split("/").pop()!)}" alt="" loading="lazy" draggable="false"></div>`;
     if (n.type === "text") return `<div class="canvas-node canvas-text${hue}" style="${style}">${markdown(n.text ?? "")}</div>`;
     return "";
   }).join("");
