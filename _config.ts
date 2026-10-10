@@ -122,9 +122,10 @@ site.process([".html"], (pages) => {
       const rest = first.innerHTML.slice(m[0].length).trim();
       if (rest) first.innerHTML = rest; else first.remove();
       const inner = bq.innerHTML;
-      bq.className = `callout ${kind}`;
+      const fold = m[2];
+      bq.className = `callout ${kind}${fold ? " is-collapsible" : ""}${fold === "-" ? " is-collapsed" : ""}`;
       bq.setAttribute("data-callout", kind);
-      bq.innerHTML = `<div class="callout-title"><div class="callout-icon"></div><div class="callout-title-inner"><p>${title}</p></div></div><div class="callout-content">${inner}</div>`;
+      bq.innerHTML = `<div class="callout-title"><div class="callout-icon"></div><div class="callout-title-inner"><p>${title}</p></div>${fold ? '<div class="fold-callout-icon"></div>' : ""}</div><div class="callout-content">${inner}</div>`;
     }
   }
 });

@@ -1,0 +1,47 @@
+@use 'sass:string';
+@use 'callout-icons' as icons;
+
+$head: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>";
+
+@function icon($body) {
+	@return string.unquote("url(\"#{$head}#{$body}</svg>\")");
+}
+
+// Every callout type has a Lucide icon (see callout-icons.txt), drawn in the colour the shared theme gives it.
+@each $name, $body in icons.$icons {
+	.callout[data-callout="#{$name}"] {
+		--callout-icon: #{icon($body)};
+		--color: var(--callout-color, var(--amber));
+	}
+}
+
+.callout-title {
+	color: var(--color, var(--amber));
+}
+
+// A callout written [!type]- starts closed, and [!type]+ starts open; the title opens and closes it.
+.callout.is-collapsible > .callout-title {
+	cursor: pointer;
+}
+
+.fold-callout-icon {
+	--callout-icon: #{icon("<path d='m6 9 6 6 6-6'/>")};
+	flex: 0 0 18px;
+	width: 18px;
+	height: 18px;
+	margin-left: auto;
+	background-color: currentColor;
+	mask: var(--callout-icon) center / 18px 18px no-repeat;
+	-webkit-mask: var(--callout-icon) center / 18px 18px no-repeat;
+	transition: transform 0.15s ease;
+}
+
+.callout.is-collapsed {
+	> .callout-title > .fold-callout-icon {
+		transform: rotate(-90deg);
+	}
+
+	> .callout-content {
+		display: none;
+	}
+}
