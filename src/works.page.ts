@@ -24,7 +24,7 @@ export default function* ({ search }: Lume.Data) {
 <h2>AI and automated use</h2>
 <p>I reserve the right to text and data mining of this site, so it may not be used to train AI models. The site says so in a <code>tdm-reservation</code> header, in <code>/.well-known/tdmrep.json</code> and in its <a href="/robots.txt">robots.txt</a>. An assistant that fetches a page to answer a question may quote it briefly, with a citation and a link. A short guide for machines is in <a href="/llms.txt">llms.txt</a>.</p>
 <h2>What is not mine</h2>
-<p>Some photographs, icons, fonts and software here belong to other people and keep their own licences. They are credited on <a href="/about-this-site/">About this site</a> and on the page that uses them.</p>
+<p>Photographs, icons, fonts and software by other people keep their own licences. <a href="/about-this-site/">About this site</a> credits them.</p>
 <h2>An earlier licence</h2>
 <p>Until 10 October 2026 the site said CC BY-SA 4.0. Anyone who took a copy under that licence keeps it for that copy. Everything shared from now on is ${LICENCE_NAME}.</p>
 <h2>Every work</h2>
