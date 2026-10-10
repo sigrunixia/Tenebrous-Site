@@ -4,7 +4,8 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 DEV="${DEV:-$HOME/Developer}"
+THEME_DIR="${THEME_DIR:-$DEV/Tenebrous-Obsidian}"
 sass --no-source-map --style=compressed \
-  --load-path=scss --load-path="$DEV/Tenebrous-Obsidian/src" --load-path=scss/site \
+  --load-path=scss --load-path="$THEME_DIR/src" --load-path=scss/site \
   scss/main.scss src/site.css
 deno task build "$@"
