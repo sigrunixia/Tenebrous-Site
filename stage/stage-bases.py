@@ -5,6 +5,12 @@ copies only.
 - list.contains(this.file.name) becomes list.join(",").contains("<this note's
   name>"). The plugin compares list items as raw text, and a link is stored as
   "[[Name]]", so an exact match never hits.
+- list(this.items).contains(file.asLink()) becomes an or: of file.name tests for
+  the links in this note's own items property (or makeup, or any list property
+  of links). The plugin has no file.asLink(), and a card list that follows a
+  note's property is built here, at stage time. A filter line that only tests
+  categories.contains(link("Products")) is dropped, since the list already
+  names the products.
 - A link list shown on a card (locations, people, types, categories) becomes a
   formula that strips the [[ ]]. A link inside a card, which is itself a link,
   is not valid HTML, and the parser splits the card into pieces. The names show
@@ -60,7 +66,24 @@ def label(block, name):
     m = re.search(r"(?m)^  note\.%s:\n    displayName: (.+)$" % name, block)
     return m.group(1).strip() if m else name.capitalize()
 
+def link_names(text, prop):
+    """The names in a list property of links in the note's frontmatter."""
+    fm = text.split("\n---\n", 1)[0]
+    m = re.search(r"(?m)^%s:\n((?:  - .*\n?)+)" % re.escape(prop), fm + "\n")
+    return re.findall(r"\[\[([^\]|#]+)", m.group(1)) if m else []
+
+def follow_links(text):
+    def sub(m):
+        names = link_names(text, m.group(2))
+        pad = m.group(1)
+        if not names:
+            return pad + '- file.name == "(none)"'
+        return pad + "- or:\n" + "\n".join('%s    - file.name == "%s"' % (pad, n.strip().replace('"', '\\"')) for n in names)
+    text = re.sub(r"(?m)^(\s*)- list\(this\.(\w+)\)\.contains\(file\.asLink\(\)\)\s*$", sub, text)
+    return re.sub(r'(?m)^\s*- categories\.contains\(link\("Products"\)\)\s*\n', "", text)
+
 def rewrite(text, name):
+    text = follow_links(text)
     text = re.sub(r"\b(\w+)\.contains\(this\.file\.name\)",
                   lambda m: '%s.join(",").contains("%s")' % (m.group(1), name.replace('"', '\\"')), text)
     def days(m):

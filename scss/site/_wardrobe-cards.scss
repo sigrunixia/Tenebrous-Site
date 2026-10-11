@@ -1,0 +1,87 @@
+// The wardrobe illustrations (outfit covers, outfit and makeup cards, the palettes and the status
+// graphic) are drawn on a transparent background in dark ink, so they sit on a cream card. The
+// cream is the theme's yellow mixed into its silver, the same as in the Obsidian theme.
+$wardrobe-art: "outfit-cover", "outfit-illustration", "makeup-card", "makeup-two-looks",
+	"greece-makeup-palette", "greece-wardrobe-palette", "wardrobe-status";
+
+@each $name in $wardrobe-art {
+	img[src*="/img/#{$name}"] {
+		box-sizing: border-box;
+		padding: 0.75rem;
+		border-radius: 4px;
+		background: color-mix(in oklab, var(--yellow) 65%, var(--silver));
+	}
+}
+
+// The outfit cover is tall, so the infobox keeps it to a sensible height and centres it. The
+// inline infobox on a narrow screen also keeps it to the width of the picture.
+.infobox img[src*="/img/outfit-cover"] {
+	max-height: 32rem;
+	object-fit: contain;
+	border-radius: 0;
+}
+
+.infobox-inline img[src*="/img/outfit-cover"] {
+	max-width: 20rem;
+	margin: 0 auto;
+}
+
+// The outfit callout holds the infobox facts for Obsidian. The site builds its own infobox from the
+// same properties, so the callout is hidden.
+.callout[data-callout="outfit"] {
+	display: none;
+}
+
+// Two images side by side, for the outfit card and the makeup card. The two embeds share one
+// paragraph, which becomes a row, and the callout has no frame, title or fill.
+.callout[data-callout="pair"] {
+	clear: both;
+	margin: 1rem 0;
+	padding: 0;
+	border: none;
+	background: none;
+
+	> .callout-title {
+		display: none;
+	}
+
+	> .callout-content > p {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin: 0;
+	}
+
+	.internal-embed {
+		display: flex;
+		flex: 0 1 19rem;
+		min-width: 0;
+		max-width: 19rem;
+	}
+
+	.internal-embed img {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: contain;
+		object-position: top;
+	}
+}
+
+// In a card the outfit cover is a tall figure, so the card shows the whole drawing on the cream, in a
+// portrait frame. It leaves out the blurred backdrop and the inversion the other SVG covers get.
+.markdown-reading-view .bases-card-image:has(img[src*="/img/outfit-cover"]) {
+	aspect-ratio: 3 / 4;
+	background: color-mix(in oklab, var(--yellow) 65%, var(--silver));
+
+	&::before {
+		display: none;
+	}
+
+	img {
+		padding: 0.5rem;
+		background: none;
+		filter: none;
+		object-fit: contain !important;
+	}
+}

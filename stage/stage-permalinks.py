@@ -101,4 +101,5 @@ for p, text in notes.items():
     new = "---\n%s\n---\n%s" % (fm, rewrite_links(body))
     if dest != p:
         os.remove(p)
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
     open(dest, "w", encoding="utf-8").write(new)

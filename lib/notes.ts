@@ -38,9 +38,10 @@ export function coverCard(cover: unknown) {
 }
 
 export function titleOf(data: Record<string, unknown>, srcPath: string) {
-  if (data.title) return String(data.title);
   const h1 = String(data.content ?? "").match(/^# (.+)$/m)?.[1];
-  return h1 ?? srcPath.split("/").pop()!.replace(/\.md$/, "");
+  const title = data.title ? String(data.title) : h1 ?? srcPath.split("/").pop()!.replace(/\.md$/, "");
+  // A footnote marker in a heading, such as [^1], is not part of the title.
+  return title.replace(/\[\^[^\]]+\]/g, "").trim();
 }
 
 // The id a heading gets, and so the anchor a link to it uses.

@@ -58,6 +58,10 @@ export function markTasks(doc: Document) {
 }
 
 // Runs a rewrite on the Markdown outside fenced code blocks, so examples of the syntax are left as they are.
+// The code blocks are set aside while the rewrite runs on the whole note, so a footnote used before a
+// block can still find its definition after it.
 export function outsideCode(md: string, fn: (text: string) => string) {
-  return md.split(/(```[\s\S]*?```|~~~[\s\S]*?~~~)/).map((part, i) => (i % 2 ? part : fn(part))).join("");
+  const blocks: string[] = [];
+  const masked = md.replace(/```[\s\S]*?```|~~~[\s\S]*?~~~/g, (block) => `\u0000code${blocks.push(block) - 1}\u0000`);
+  return fn(masked).replace(/\u0000code(\d+)\u0000/g, (_, i) => blocks[Number(i)]);
 }

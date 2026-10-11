@@ -36,6 +36,7 @@ hub-obsidian gem
 hub-tattoos flame
 hub-essays scroll-text
 hub-gear backpack
+hub-wardrobe shirt
 hub-traveling luggage
 hub-projects wrench
 hub-about user

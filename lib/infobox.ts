@@ -64,7 +64,7 @@ function filedUnder(data: Data, names: Names, withTypes: boolean) {
 export function buildInfobox(data: Data, names: Names, minutes: number, lessons = false): { html: string; label: string } | undefined {
   const classes = list(data.cssclasses).map(String);
   if (classes.some((c) => ["hub", "landing", "κόμβος"].includes(c))) return undefined;
-  const trip = classes.includes("trip"), project = classes.includes("project");
+  const trip = classes.includes("trip"), project = classes.includes("project"), outfit = classes.includes("outfit");
   const rows: [string, string][] = [];
   const a = asDate(data.started), b = asDate(data.ended), m = asDate(data.modified);
   const updated = m ? `${dmy(m)} <span class="infobox-note">(${minutes} min read)</span>` : "";
@@ -81,6 +81,17 @@ export function buildInfobox(data: Data, names: Names, minutes: number, lessons 
     const links = list(data.sources).map(String).filter((u) => u.startsWith("http")).map(source);
     if (links.length) rows.push(["Links", links.join("<br>")]);
     const f = filedUnder(data, names, false);
+    if (f) rows.push(["Filed under", f]);
+  } else if (outfit) {
+    // The places, the season and the makeup time of an outfit. The pieces and the makeup products
+    // are cards in the note, so they are not repeated here.
+    for (const [label, key] of [["Locations", "locations"], ["Season", "seasons"]]) {
+      const vals = list(data[key]);
+      if (vals.length) rows.push([label, vals.map((v) => item(v, names)).join(", ")]);
+    }
+    if (data.makeup_time) rows.push(["Makeup", esc(String(list(data.makeup_time)[0]))]);
+    if (updated) rows.push(["Updated", updated]);
+    const f = filedUnder(data, names, true);
     if (f) rows.push(["Filed under", f]);
   } else if (!trip) {
     if (updated) rows.push(["Updated", updated]);
