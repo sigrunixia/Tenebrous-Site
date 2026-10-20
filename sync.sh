@@ -65,41 +65,8 @@ for name in sorted(whole | covers):
             centre = (0.5, 0.35 if im.height > im.width else 0.5)
             ImageOps.fit(im, (800, 600), Image.LANCZOS, centering=centre).save(out, "WEBP", quality=78, method=6)
 PYEND
-# Place notes in the vault are not published, but their icon and colour decide the map markers. Their
-# properties go in places.json by every name a trip might use, and each icon is fetched once from Lucide.
+# Place notes in the vault are not published, but their icon and colour decide the map markers. place-data.js
+# puts their properties in places.json and fetches each icon from Lucide once.
 VAULT="${VAULT:-$HOME/Vaults/Tenebrous}"
-python3 - "$VAULT" <<'PYEND'
-import glob, json, os, re, shutil, sys, urllib.request
-vault = sys.argv[1]
-places, icons = {}, set()
-for path in glob.glob(os.path.join(vault, "Reference/Places/*.md")):
-    m = re.match(r"---\n(.*?)\n---", open(path, encoding="utf-8").read(), re.S)
-    if not m:
-        continue
-    props, key = {}, None
-    for line in m.group(1).split("\n"):
-        k = re.match(r"^([A-Za-z_\-]+):[ \t]*(.*)$", line)
-        if k:
-            key, v = k.group(1), k.group(2).strip().strip("\"'")
-            props[key] = [] if v == "" else v
-        elif key and re.match(r"^\s+-\s", line):
-            if not isinstance(props[key], list):
-                props[key] = [props[key]] if props[key] else []
-            props[key].append(re.sub(r"^\s+-\s*", "", line).strip().strip("\"'"))
-    names = [os.path.splitext(os.path.basename(path))[0]] + (props.get("aliases") or [])
-    for n in names:
-        places.setdefault(n.lower(), props)
-    if isinstance(props.get("icon"), str):
-        icons.add(props["icon"])
-json.dump(places, open("places.json", "w", encoding="utf-8"), ensure_ascii=False)
-os.makedirs("src/static/lucide", exist_ok=True)
-for icon in sorted(icons):
-    dest = f"src/static/lucide/{icon}.svg"
-    if not os.path.exists(dest):
-        try:
-            urllib.request.urlretrieve(f"https://unpkg.com/lucide-static/icons/{icon}.svg", dest)
-        except Exception:
-            print(f"no Lucide icon {icon!r}", file=sys.stderr)
-print(f"{len(places)} place names, {len(icons)} icons")
-PYEND
+deno run --allow-read --allow-write --allow-net stage/place-data.js "$VAULT"
 echo "synced $(find src/notes \( -name '*.md' -o -name '*.canvas' \) | wc -l | tr -d ' ') notes and $(ls src/img | wc -l | tr -d ' ') images"
