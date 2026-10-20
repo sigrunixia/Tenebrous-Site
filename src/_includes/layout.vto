@@ -33,7 +33,7 @@
   <script src="/static/callouts.js" defer></script>
   <script src="/static/search.js" defer></script>
   <script src="/static/popover.js" defer></script>
-  {{ if map }}<script src="/static/base-map.js" defer></script>{{ /if }}
+  {{ if content.includes("base-map-embed") }}<script src="/static/base-map.js" defer></script>{{ /if }}
 </head>
 <body>
   <header class="site-header"><a class="site-header-text" href="/">A Tenebrous Dragon</a></header>
