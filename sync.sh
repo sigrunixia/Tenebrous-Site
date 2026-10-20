@@ -10,7 +10,7 @@ done)
 # Pictures, under the names the notes use (lower case, hyphens). Covers become 800x600 WebP cards, line-icon
 # SVGs are copied as they are, and the pictures embedded in notes or placed on a canvas are cut down to 1600 px
 # and written as WebP (photo.jpeg becomes photo.jpeg.webp; see imageFile in lib/notes.ts).
-python3 - <<'PYEND'
+/opt/homebrew/bin/python3.14 - <<'PYEND'
 import glob, json, os, re, shutil
 from PIL import Image, ImageOps
 slug = lambda s: re.sub(r"-+", "-", s.lower().replace(" ", "-").replace("&", "-and-")).strip("-")
