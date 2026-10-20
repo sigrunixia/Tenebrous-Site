@@ -261,7 +261,7 @@ export function renderBase(source: string, notes: Note[], ctx: Context, host: No
     sorted.forEach(([k, v]) => groups.set(k, v));
   } else groups.set("", shown);
 
-  const label = (p: string) => base.properties?.[p]?.displayName ?? p.replace(/^(note|file|formula)\./, "");
+  const label = (p: string) => (base.properties?.[p] ?? base.properties?.[`note.${p}`])?.displayName ?? p.replace(/^(note|file|formula)\./, "");
   const cols = (view.order ?? []).filter((p) => p !== "file.name");
 
   const card = (r: { note: Note; env: Env }) => {
