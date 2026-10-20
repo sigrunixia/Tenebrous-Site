@@ -83,13 +83,12 @@ export function buildInfobox(data: Data, names: Names, minutes: number, lessons 
     const f = filedUnder(data, names, false);
     if (f) rows.push(["Filed under", f]);
   } else if (outfit) {
-    // The places, the season and the makeup time of an outfit. The pieces and the makeup products
+    // The formality, the makeup loadout and the status of an outfit. The pieces and the makeup products
     // are cards in the note, so they are not repeated here.
-    for (const [label, key] of [["Locations", "locations"], ["Season", "seasons"]]) {
-      const vals = list(data[key]);
-      if (vals.length) rows.push([label, vals.map((v) => item(v, names)).join(", ")]);
-    }
-    if (data.makeup_time) rows.push(["Makeup", esc(String(list(data.makeup_time)[0]))]);
+    if (data.formality) rows.push(["Formality", esc(String(list(data.formality)[0]))]);
+    if (data.makeup) rows.push(["Makeup", item(list(data.makeup)[0], names)]);
+    if (data.statuses) rows.push(["Status", esc(String(list(data.statuses)[0]))]);
+    if (!data.makeup && data.makeup_time) rows.push(["Makeup", esc(String(list(data.makeup_time)[0]))]);
     if (updated) rows.push(["Updated", updated]);
     const f = filedUnder(data, names, true);
     if (f) rows.push(["Filed under", f]);
