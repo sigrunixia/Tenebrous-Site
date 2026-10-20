@@ -25,7 +25,8 @@ function tokenize(src: string): Tok[] {
 
 // resolve turns a [[link]] into the note it names (its properties), for asFile().
 export type Resolve = (link: string) => Record<string, Val> | undefined;
-type Env = { note: Note; formulas: Record<string, string>; cache: Map<string, Val>; resolve: Resolve };
+// host is the note the base sits in, which `this` names.
+type Env = { note: Note; host: Note; formulas: Record<string, string>; cache: Map<string, Val>; resolve: Resolve };
 
 function evaluate(src: string, env: Env): Val {
   const toks = tokenize(src);
@@ -82,6 +83,7 @@ function evaluate(src: string, env: Env): Val {
   function ident(name: string): Val {
     if (name === "file") return fileObj(env.note);
     if (name === "note") return env.note.data;
+    if (name === "this") return { file: { name: titleOf(env.host.data, env.host.path) } };
     if (name === "formula") return new Proxy({}, { get: (_, p) => formula(String(p), env) });
     return env.note.data[name];
   }
@@ -113,7 +115,7 @@ function evaluate(src: string, env: Env): Val {
     };
   }
   const mul = bin(unary, ["*", "/"], (o, a, b) => (o === "*" ? Number(a) * Number(b) : Number(a) / Number(b)));
-  const add = bin(mul, ["+", "-"], (o, a, b) => (o === "+" ? (typeof a === "number" && typeof b === "number" ? a + b : String(a ?? "") + String(b ?? "")) : Number(a) - Number(b)));
+  const add = bin(mul, ["+", "-"], (o, a, b) => (o === "+" ? (typeof a === "number" && typeof b === "number" ? a + b : String(a ?? "") + String(b ?? "")) : a instanceof Date && b instanceof Date ? { days: (+a - +b) / 86400000 } : Number(a) - Number(b)));
   const cmp = bin(add, ["==", "!=", "<", "<=", ">", ">="], (o, a, b) => compare(o, a, b));
   const and = bin(cmp, ["&&"], (_, a, b) => truthy(a) && truthy(b));
   const or: () => Val = bin(and, ["||"], (_, a, b) => truthy(a) || truthy(b));
@@ -128,6 +130,9 @@ function text(v: Val): string {
   if (Array.isArray(v)) return v.map(text).join(",");
   return String(v ?? "");
 }
+
+// The note a [[link]] names, so a link written with other display text still matches.
+const target = (v: Val) => text(v).replace(/^\[\[|\]\]$/g, "").split("|")[0].split("#")[0].trim();
 
 function compare(op: string, a: Val, b: Val): boolean {
   const x = a instanceof Date ? a.toISOString() : a, y = b instanceof Date ? b.toISOString() : b;
@@ -157,7 +162,7 @@ function callMethod(v: Val, name: string, args: Val[], env: Env): Val {
       const props = env.resolve(text(v));
       return props ? { properties: props, name: text(v).replace(/^\[\[|\]\]$/g, "").split("|").pop() } : undefined;
     }
-    case "contains": return Array.isArray(v) ? v.some((x) => text(x) === text(args[0])) : text(v).includes(text(args[0]));
+    case "contains": return Array.isArray(v) ? v.some((x) => text(x) === text(args[0]) || target(x) === target(args[0])) : text(v).includes(text(args[0]));
     case "containsAny": return args.some((a) => text(v).includes(text(a)));
     case "startsWith": return text(v).startsWith(text(args[0]));
     case "endsWith": return text(v).endsWith(text(args[0]));
@@ -173,6 +178,7 @@ function callMethod(v: Val, name: string, args: Val[], env: Env): Val {
 
 function callFn(name: string, args: Val[]): Val {
   switch (name) {
+    case "link": return `[[${text(args[0])}]]`;
     case "date": return args[0] instanceof Date ? args[0] : new Date(text(args[0]));
     case "list": return Array.isArray(args[0]) ? args[0] : args[0] == null ? [] : [args[0]];
     case "now": return new Date();
@@ -214,12 +220,12 @@ type Base = { filters?: Filter; formulas?: Record<string, string>; properties?: 
 export type MapPayload = { zoom?: number; center?: number[]; markers: { name: string; lat: string; lng: string; icon?: string; color?: string; url: string }[] };
 export type Context = { resolve: Resolve; map: (payload: MapPayload) => string };
 
-export function renderBase(source: string, notes: Note[], ctx: Context): string {
+export function renderBase(source: string, notes: Note[], ctx: Context, host: Note): string {
   const base = parse(source) as Base;
   const formulas = base.formulas ?? {};
   const view = (base.views ?? [])[0];
   if (!view) return "";
-  const envFor = (note: Note): Env => ({ note, formulas, cache: new Map(), resolve: ctx.resolve });
+  const envFor = (note: Note): Env => ({ note, host, formulas, cache: new Map(), resolve: ctx.resolve });
   const rows = notes
     .map((note) => ({ note, env: envFor(note) }))
     .filter(({ env }) => passes(base.filters, env) && passes(view.filters, env));

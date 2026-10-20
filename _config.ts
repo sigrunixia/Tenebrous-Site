@@ -101,7 +101,7 @@ site.preprocess([".md"], (pages) => {
     let c = page.data.content as string;
     if (typeof c !== "string") continue;
     c = outsideCode(c, (text) => tasks(footnotes(embeds(withoutBlockIds(transclude(text, find))))));
-    c = c.replace(/```base\n([\s\S]*?)```/g, (_, src) => `\n\n${renderBase(src, notes, context)}\n\n`);
+    c = c.replace(/```base\n([\s\S]*?)```/g, (_, src) => `\n\n${renderBase(src, notes, context, { path: page.src.path + ".md", data: page.data })}\n\n`);
     // [[target|Name]] links to a published note, or to a heading in one. A note that is not on the site stays plain text.
     c = c.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, (_, target, name) => link(target, name));
     c = c.replace(/\[\[([^\]|]+)\]\]/g, (_, target) => link(target, target.replace(/^#/, "")));
