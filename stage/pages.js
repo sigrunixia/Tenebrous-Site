@@ -254,7 +254,7 @@ cssclasses:
 
 # Site map
 
-You can also use the search bar or the graph button beside it.
+You can also use the search bar.
 
 ## Hubs
 
