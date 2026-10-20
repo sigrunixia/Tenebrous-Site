@@ -1,13 +1,11 @@
 // An Obsidian canvas (JSON Canvas) as HTML. Text, file (image) and group nodes are placed where
 // the canvas puts them; a script adds pan and zoom. The canvas colour presets use the palette.
-import { imageFile } from "./notes.ts";
+import { esc, imageFile } from "./notes.ts";
 
 type Node = { id: string; type: string; x: number; y: number; width: number; height: number; text?: string; file?: string; label?: string; color?: string; url?: string };
 type Canvas = { nodes: Node[] };
 
-const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 const HUES: Record<string, string> = { "1": "red", "2": "orange", "3": "yellow", "4": "green", "5": "cyan", "6": "purple" };
-export const slug = (s: string) => s.toLowerCase().replace(/ /g, "-").replace(/&/g, "-and-").replace(/-+/g, "-").replace(/^-|-$/g, "");
 
 // The little bit of Markdown the text nodes use, on one escaped line at a time.
 function inline(s: string) {

@@ -2,7 +2,7 @@
 // a YAML document with filters, formulas and views. This runs the filters and formulas and
 // writes the cards view as HTML. It does not cover every Bases function, only the ones the notes use.
 import { parse } from "jsr:@std/yaml@1";
-import { coverCard, noteUrl, titleOf } from "./notes.ts";
+import { coverCard, esc, noteUrl, titleOf } from "./notes.ts";
 
 type Val = unknown;
 export type Note = { path: string; data: Record<string, Val> };
@@ -48,7 +48,6 @@ function evaluate(src: string, env: Env): Val {
       if (peek()?.v === "(") {
         eat("(");
         const args: Val[] = [];
-        const raw = i;
         // Arguments are evaluated lazily for `if`, so remember where each starts.
         if (k.v === "if") {
           const c = or(); eat(",");
@@ -62,7 +61,6 @@ function evaluate(src: string, env: Env): Val {
         }
         if (peek()?.v !== ")") { do args.push(or()); while (eat(",")); }
         eat(")");
-        void raw;
         return callFn(k.v, args);
       }
       return ident(k.v);
@@ -200,8 +198,6 @@ function passes(f: Filter | undefined, env: Env): boolean {
   if (f.not) return !f.not.some((x) => passes(x, env));
   return true;
 }
-
-const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 
 function show(v: Val): string {
   if (v instanceof Date) return v.toISOString().slice(0, 10);

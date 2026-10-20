@@ -6,6 +6,8 @@ const slugify = createSlugifier({ alphanumeric: false });
 
 export const slugOf = (name: string) => decodeURI(slugify(name));
 
+export const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+
 // Image files keep the names the staging step gave them.
 export const fileSlug = (name: string) => name.toLowerCase().replace(/ /g, "-").replace(/&/g, "-and-").replace(/-+/g, "-").replace(/^-|-$/g, "");
 

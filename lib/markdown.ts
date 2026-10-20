@@ -1,9 +1,8 @@
 // The Obsidian Markdown that Lume's own renderer does not know: image embeds, footnotes and task lists.
 // Each function takes a note's Markdown and gives it back with the HTML that stands in for the syntax.
-import { imageFile } from "./notes.ts";
+import { esc, imageFile } from "./notes.ts";
 
 const IMAGE = /\.(png|jpe?g|webp|gif|svg|avif)$/i;
-const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 
 // ![[picture.jpg]] and ![[picture.jpg|description]] become an image. Other embeds are left for the link step.
 export function embeds(md: string) {

@@ -1,11 +1,10 @@
 // The facts box beside a note, built from its frontmatter. A trip, a project and any other note
 // each get their own fields. Names link only when that note is on the site.
-import { coverCard, slugOf, wikiTarget } from "./notes.ts";
+import { coverCard, esc, slugOf, wikiTarget } from "./notes.ts";
 
 type Data = Record<string, unknown>;
 export type Names = Map<string, { url: string; title: string }>;
 
-const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 const list = (v: unknown): unknown[] => (Array.isArray(v) ? v : v ? [v] : []);
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const asDate = (v: unknown) => (v instanceof Date && !isNaN(+v) ? v : undefined);
@@ -43,8 +42,6 @@ function source(u: string) {
   const label = host.endsWith("wikipedia.org") ? "Wikipedia" : host === "github.com" && path ? `${host}/${path}` : host;
   return `<a href="${esc(u)}" class="external" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
 }
-
-const STRUCTURAL = new Set(["hub", "categories", "topics"]);
 
 function filedUnder(data: Data, names: Names, withTypes: boolean) {
   const pills: string[] = [];

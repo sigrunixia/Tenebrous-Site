@@ -12,7 +12,7 @@ import { transclude, type Source, withoutBlockIds } from "./lib/transclude.ts";
 import { redirects } from "./lib/redirects.ts";
 import { externalLinks, greekLang, uniqueIds } from "./lib/polish.ts";
 import { diagrams } from "./lib/diagrams.ts";
-import { renderCanvas, slug as canvasSlug } from "./lib/canvas.ts";
+import { renderCanvas } from "./lib/canvas.ts";
 import { buildInfobox, nameKeys, type Names } from "./lib/infobox.ts";
 import places from "./places.json" with { type: "json" };
 
@@ -105,7 +105,7 @@ site.preprocess([".md"], (pages) => {
     // [[target|Name]] links to a published note, or to a heading in one. A note that is not on the site stays plain text.
     c = c.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, (_, target, name) => link(target, name));
     c = c.replace(/\[\[([^\]|]+)\]\]/g, (_, target) => link(target, target.replace(/^#/, "")));
-    c = c.replace(/==(.+?)==/g, (all, text) => {
+    c = c.replace(/==(.+?)==/g, (_, text) => {
       const hue = marks[[...text.trim()][0]] ?? "yellow";
       return `<mark class="text-highlight hl-${hue}">${text}</mark>`;
     });
@@ -148,7 +148,7 @@ site.process([".html"], (pages) => {
 });
 
 // The facts box, in the right sidebar and again after the title for narrow screens.
-let names: Names = new Map();
+const names: Names = new Map();
 site.preprocess([".md"], (pages) => {
   for (const p of pages) {
     const stem = p.src.path.split("/").pop()!;
