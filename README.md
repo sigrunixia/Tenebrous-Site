@@ -10,7 +10,7 @@ The source for [tenebrousdragon.com](https://tenebrousdragon.com). It builds the
 wrangler deploy
 ```
 
-`sync.sh` stages the published notes and their pictures. `build.sh` compiles the stylesheet with Sass and builds the site into `_site/`. Use `deno task serve` to preview it. Deno, Sass and Wrangler come from brew, and nothing here uses npm.
+`sync.sh` stages the published notes and their pictures. `build.sh` compiles the stylesheet with Sass and builds the site into `_site/`. Use `deno task serve` to preview it. Deno, Sass, Wrangler and Python with Pillow (it resizes the pictures) come from brew, and nothing here uses npm.
 
 ## Folders
 
