@@ -51,9 +51,6 @@ python3 "$HERE/stage-contact.py" "$STAGE"
 # category, and the site map index that lists them.
 deno run --allow-read --allow-write "$HERE/pages.js" "$STAGE" "$VAULT"
 
-# Rewrite Bases filters and formulas the plugin cannot evaluate.
-python3 "$HERE/stage-bases.py" "$STAGE"
-
 # Optional banner at the top of the home note. Delete notice.md to remove it.
 if [ -f "$HERE/notice.md" ]; then
   home="$STAGE/index.md"
@@ -102,21 +99,3 @@ while IFS= read -r ref; do
 done <<< "$refs"
 
 echo "Staged to $STAGE ($(find "$STAGE" -type f | wc -l | tr -d ' ') files, $missing missing)"
-
-# The Bases reader compares links as raw text, so list.contains(link("Name")) never
-# matches. Rewrite it to a substring test on the joined list, in the staged
-# copies only.
-while IFS= read -r -d '' f; do
-  perl -pi -e 's/\b(\w+)\.contains\(link\("([^"]+)"\)\)/$1.join(",").contains("$2")/g' "$f"
-done < <(find "$STAGE" -type f \( -name '*.md' -o -name '*.base' \) -print0)
-
-# The Bases plugin cannot compare a date property with today() or read
-# started.year, though it compares strings and date(x).year fine. Rewrite both
-# in the staged copies, using the build date for today().
-TODAY="$(date +%Y-%m-%d)"
-while IFS= read -r -d '' f; do
-  perl -pi -e '
-    s/\b(\w+) (<=|>=|<|>) today\(\)/$1.toString() $2 "'"$TODAY"'"/g;
-    s/\b(started|ended)\.year\b/date($1).year/g;
-  ' "$f"
-done < <(find "$STAGE" -type f \( -name '*.md' -o -name '*.base' \) -print0)
