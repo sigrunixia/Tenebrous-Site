@@ -47,12 +47,9 @@ python3 "$HERE/stage-permalinks.py" "$STAGE"
 # The contact cards repeat the sidebar links, so leave them out.
 python3 "$HERE/stage-contact.py" "$STAGE"
 
-# A page per place, listing its trips, so a trip's Where has somewhere to link.
-python3 "$HERE/stage-places.py" "$STAGE"
-
-# A page per type and category, and the site map index that lists them.
-python3 "$HERE/stage-types.py" "$STAGE"
-python3 "$HERE/stage-sitemap.py" "$STAGE"
+# A page per place, listing its trips, so a trip's Where has somewhere to link. A page per type and
+# category, and the site map index that lists them.
+deno run --allow-read --allow-write "$HERE/pages.js" "$STAGE" "$VAULT"
 
 # Rewrite Bases filters and formulas the plugin cannot evaluate.
 python3 "$HERE/stage-bases.py" "$STAGE"
