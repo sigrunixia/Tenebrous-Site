@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Copy only the published notes, and the files they embed, from the Tenebrous
-# vault into .stage/ so Quartz never reads an unpublished note.
+# vault into .stage/ so the build never reads an unpublished note.
 #
 # A note is published when its frontmatter has `publish: true`. Dot folders
 # (.trash, .obsidian) and Admin/Templates and Admin/Legends are skipped, the
@@ -37,7 +37,7 @@ for n in "${notes[@]}"; do
   copy "$n"
 done
 
-# Tags are a line in the note body in the vault. Quartz wants them in frontmatter.
+# Tags are a line in the note body in the vault. The site reads them from frontmatter.
 python3 "$HERE/stage-tags.py" "$STAGE"
 
 # Make each permalink the page's URL, rewrite links to match, and drop aliases
@@ -106,7 +106,7 @@ done <<< "$refs"
 
 echo "Staged to $STAGE ($(find "$STAGE" -type f | wc -l | tr -d ' ') files, $missing missing)"
 
-# Quartz compares links as raw text, so list.contains(link("Name")) never
+# The Bases reader compares links as raw text, so list.contains(link("Name")) never
 # matches. Rewrite it to a substring test on the joined list, in the staged
 # copies only.
 while IFS= read -r -d '' f; do

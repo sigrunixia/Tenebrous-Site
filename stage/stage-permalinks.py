@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """Make each note's permalink its URL, in the staged copies only.
 
-Quartz builds a page's URL from its file path and treats `permalink` as a
-redirect alias. Obsidian Publish served the permalink itself. So for every
-staged note with a permalink this script
+The build makes a page's URL from its file path, and Obsidian Publish served
+the permalink itself. So for every staged note with a permalink this script
   - moves the file to <permalink>.md at the stage root,
-  - sets `title:` to the old file name, since Quartz titles pages from the path,
+  - sets `title:` to the old file name, so the page keeps its title,
   - drops the permalink line and any alias that would collide with the new URL,
   - rewrites wikilinks in note bodies to point at the new path.
 Frontmatter links are left alone, because Bases filters match on their text.
 Aliases equal to a note's own URL are dropped for notes without a permalink too,
-since Quartz would write a redirect page over the note.
+since an alias that matches the note's own URL is no use as a redirect.
 """
 import json, os, re, sys
 
@@ -40,7 +39,7 @@ for p, text in notes.items():
         continue
     perma = m.group(1).strip("\"'")
     if perma == "home":
-        perma = "index"  # Quartz serves index as the site root, and so does its graph
+        perma = "index"  # index is the site root
     rel = os.path.relpath(p, stage)[:-3]
     name = os.path.basename(rel)
     moves[p] = (perma, name)

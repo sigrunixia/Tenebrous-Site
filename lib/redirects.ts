@@ -2,8 +2,8 @@
 // slugifier writes it differently from the old site (a comma becomes a hyphen, .canvas becomes -canvas),
 // and an alias of a note (its other names, in the note's frontmatter) used to be a redirect page of its own.
 
-// The address Quartz gave a note: lower case, spaces to hyphens, a few characters spelled out, commas kept.
-export function quartzSlug(path: string) {
+// The address the old site gave a note: lower case, spaces to hyphens, a few characters spelled out, commas kept.
+export function oldSlug(path: string) {
   return path.split("/").map((p) =>
     p.toLowerCase().replace(/ /g, "-").replace(/&/g, "-and-").replace(/%/g, "-percent").replace(/\?/g, "-q").replace(/#/g, "-h")
       .replace(/-+/g, "-").replace(/^-|-$/g, "")
@@ -25,9 +25,9 @@ export function redirects(entries: Entry[], carried: string[]) {
   };
   for (const e of entries) {
     const base = e.path.replace(/\.(md|canvas)$/, "");
-    const old = e.path.endsWith(".canvas") ? `${quartzSlug(base)}.canvas` : quartzSlug(base).replace(/\/index$/, "");
+    const old = e.path.endsWith(".canvas") ? `${oldSlug(base)}.canvas` : oldSlug(base).replace(/\/index$/, "");
     add(old, e.url);
-    for (const a of e.aliases) add(quartzSlug(a), e.url);
+    for (const a of e.aliases) add(oldSlug(a), e.url);
   }
   const rules = [...lines.values()];
   // The hand-kept ones come first, so they win over a generated rule for the same address.

@@ -19,7 +19,7 @@ export const imageFile = (name: string) => {
 };
 
 // The staging step names each file after its address, folders included (places/athens), so the
-// path under notes/ is the address. Quartz lower-cases it and turns spaces into hyphens.
+// path under notes/ is the address. slugOf lower-cases it and turns spaces into hyphens.
 export function noteUrl(srcPath: string) {
   const path = srcPath.replace(/^\/notes\//, "").replace(/\.md$/, "");
   if (path === "index") return "/";

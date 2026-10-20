@@ -28,7 +28,7 @@ site.add("img");
 site.add("site.css");
 site.add("root/favicon.ico", "favicon.ico");
 
-// Canvases: each .canvas file becomes a page at the address Quartz gave it (the folders and the .canvas ending kept).
+// Canvases: each .canvas file becomes a page at the address the old site gave it (the folders and the .canvas ending kept).
 site.loadPages([".canvas"], {
   loader: async (path: string) => {
     const name = path.split("/src/notes/")[1].replace(/\.canvas$/, "");

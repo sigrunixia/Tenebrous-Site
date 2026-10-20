@@ -2,8 +2,8 @@
 """Move the tag lines in the staged notes back into frontmatter.
 
 In the vault, tags are not frontmatter. Each note has one line of #tags near the top of its body.
-Quartz reads tags from frontmatter, and prints a tag line in the page as visible text, so the
-staged copy puts them back where Quartz expects them. The vault is not touched.
+The site reads tags from frontmatter, and a tag line in the page would print as visible text, so the
+staged copy puts them back where the site expects them. The vault is not touched.
 
 usage: stage-tags.py <stage dir>
 """

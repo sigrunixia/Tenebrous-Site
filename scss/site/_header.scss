@@ -39,17 +39,3 @@
 		font-size: min(var(--site-name-size), 4.4vw);
 	}
 }
-
-.page[data-frame="default"] > #quartz-body {
-	.sidebar {
-		padding-top: 1.5rem;
-	}
-
-	.page-header {
-		margin-top: 1.5rem;
-	}
-}
-
-.page[data-frame="canvas"] > #quartz-body {
-	height: calc(100vh - var(--site-header-height, 4rem));
-}
