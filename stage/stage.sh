@@ -37,15 +37,13 @@ for n in "${notes[@]}"; do
   copy "$n"
 done
 
-# Tags are a line in the note body in the vault. The site reads them from frontmatter.
-python3 "$HERE/stage-tags.py" "$STAGE"
+# Tags are a line in the note body in the vault, and the site reads them from frontmatter. The contact
+# cards repeat the sidebar links, so leave them out.
+deno run --allow-read --allow-write "$HERE/notes.js" "$STAGE"
 
 # Make each permalink the page's URL, rewrite links to match, and drop aliases
 # that would overwrite a page with a redirect.
 python3 "$HERE/stage-permalinks.py" "$STAGE"
-
-# The contact cards repeat the sidebar links, so leave them out.
-python3 "$HERE/stage-contact.py" "$STAGE"
 
 # A page per place, listing its trips, so a trip's Where has somewhere to link. A page per type and
 # category, and the site map index that lists them.
