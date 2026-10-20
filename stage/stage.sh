@@ -38,12 +38,9 @@ for n in "${notes[@]}"; do
 done
 
 # Tags are a line in the note body in the vault, and the site reads them from frontmatter. The contact
-# cards repeat the sidebar links, so leave them out.
+# cards repeat the sidebar links, so leave them out. Each permalink becomes the page's URL, with links
+# rewritten to match and the aliases that would collide with it dropped.
 deno run --allow-read --allow-write "$HERE/notes.js" "$STAGE"
-
-# Make each permalink the page's URL, rewrite links to match, and drop aliases
-# that would overwrite a page with a redirect.
-python3 "$HERE/stage-permalinks.py" "$STAGE"
 
 # A page per place, listing its trips, so a trip's Where has somewhere to link. A page per type and
 # category, and the site map index that lists them.
