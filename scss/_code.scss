@@ -14,3 +14,20 @@ pre {
 		font-family: ui-monospace, 'SF Mono', Menlo, monospace;
 	}
 }
+
+// Diagrams drawn by Pele (lib/diagrams.ts). The colours follow the page's own palette, so light and dark both work.
+.diagram {
+	margin: 1rem 0;
+	overflow-x: auto;
+
+	.pele {
+		--pele-bg: transparent;
+		--pele-fg: var(--text-normal);
+		--pele-muted: var(--text-muted);
+		--pele-line: var(--text-faint);
+		--pele-surface: var(--bg-raised);
+		--pele-surface-alt: var(--background-secondary);
+		--pele-border: var(--background-modifier-border);
+		--pele-accent: var(--blue);
+	}
+}
