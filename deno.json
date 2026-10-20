@@ -1,6 +1,7 @@
 {
   "imports": {
-    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.3.2/"
+    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.3.2/",
+    "pele": "https://cdn.jsdelivr.net/npm/pele@1.7.0/dist/pele.js"
   },
   "lock": false,
   "tasks": {

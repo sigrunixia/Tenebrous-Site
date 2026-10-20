@@ -1,5 +1,5 @@
 // Mermaid blocks become inline SVG at build time with Pele, so the page needs no script.
-import { render } from "https://cdn.jsdelivr.net/npm/pele@1.7.0/dist/pele.js";
+import { render } from "pele";
 
 // Turns every ```mermaid block (markdown-it writes it as <pre><code class="language-mermaid">) into a figure holding the SVG.
 // A block Pele cannot read stays as the code it was, and the build says which one.
