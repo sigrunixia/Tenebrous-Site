@@ -11,6 +11,7 @@ import { embeds, footnotes, markTasks, outsideCode, tasks } from "./lib/markdown
 import { transclude, type Source, withoutBlockIds } from "./lib/transclude.ts";
 import { redirects } from "./lib/redirects.ts";
 import { externalLinks, greekLang, uniqueIds } from "./lib/polish.ts";
+import { diagrams } from "./lib/diagrams.ts";
 import { renderCanvas, slug as canvasSlug } from "./lib/canvas.ts";
 import { buildInfobox, nameKeys, type Names } from "./lib/infobox.ts";
 import places from "./places.json" with { type: "json" };
@@ -250,6 +251,11 @@ site.process([".html"], (pages) => {
     externalLinks(doc, "tenebrousdragon.com");
     doc.body.innerHTML = greekLang(doc.body.innerHTML);
   }
+});
+
+// Mermaid blocks become SVG after the Greek marks, which would otherwise put spans inside the diagram text.
+site.process([".html"], (pages) => {
+  for (const page of pages) if (page.document) diagrams(page.document, page.data.url as string);
 });
 
 site.use(checkUrls({ output: "_broken-links.json" }));
