@@ -8,6 +8,8 @@ export const layout = "layout.vto";
 export default function* ({ search }: Lume.Data) {
   const tags = new Map<string, Lume.Data[]>();
   for (const page of search.pages("publish=true")) {
+    // The Greek pages at /el/ are translations of the English ones, so a tag page lists the English page only.
+    if (page.url.startsWith("/el/")) continue;
     for (const t of [page.tags ?? []].flat().map((x: string) => String(x).replace(/^#/, ""))) {
       if (ROLE.has(t.toLowerCase())) continue;
       tags.set(t, [...(tags.get(t) ?? []), page]);
