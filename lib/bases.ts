@@ -83,7 +83,11 @@ function evaluate(src: string, env: Env): Val {
   function ident(name: string): Val {
     if (name === "file") return fileObj(env.note);
     if (name === "note") return env.note.data;
-    if (name === "this") return { file: { name: titleOf(env.host.data, env.host.path) } };
+    // On a Greek page `this` is still the English note it translates, because the notes' types name that note.
+    if (name === "this") {
+      const original = env.host.data.translation_of;
+      return { file: { name: original ? String(original).split("/").pop()!.replace(/\.md$/, "") : titleOf(env.host.data, env.host.path) } };
+    }
     if (name === "formula") return new Proxy({}, { get: (_, p) => formula(String(p), env) });
     return env.note.data[name];
   }
@@ -226,7 +230,10 @@ export function renderBase(source: string, notes: Note[], ctx: Context, host: No
   const view = (base.views ?? [])[0];
   if (!view) return "";
   const envFor = (note: Note): Env => ({ note, host, formulas, cache: new Map(), resolve: ctx.resolve });
+  // The Greek notes sit under /notes/el/ beside the English ones, so a Base on a page lists only the notes of that page's language.
+  const greek = (n: Note) => n.path.startsWith("/notes/el/");
   const rows = notes
+    .filter((note) => greek(note) === greek(host))
     .map((note) => ({ note, env: envFor(note) }))
     .filter(({ env }) => passes(base.filters, env) && passes(view.filters, env));
 
